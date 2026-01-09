@@ -7,7 +7,25 @@
     <meta name="description" content="Satu Foto Bisa Dijual Berkali-kali (Ini Caranya)">
     <meta name="theme-color" content="#0F172A">
 
-    <!-- Icons Only (FontAwesome CDN yang stabil) -->
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1420941069372944');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1420941069372944&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Icons Only (FontAwesome CDN) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -27,12 +45,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* System Font Stack: Menggunakan font bawaan perangkat (0 load time) */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            /* System Font Stack: Font bawaan HP/Laptop (0 load time) */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 70px; /* Ruang untuk tombol sticky mobile */
+            padding-bottom: 80px; /* Ruang untuk tombol sticky mobile */
         }
 
         a { text-decoration: none; color: inherit; }
@@ -40,11 +58,7 @@
         ul { list-style: none; }
 
         /* 2. UTILITY */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         .text-center { text-align: center; }
         .bold { font-weight: 700; }
         .text-primary { color: var(--primary); }
@@ -89,66 +103,47 @@
         }
 
         /* Hero */
-        .hero {
-            background-color: var(--dark);
-            padding: 60px 0;
-            color: var(--white);
-        }
-        .hero-wrap {
-            display: flex;
-            align-items: center;
-            flex-direction: column-reverse; /* Mobile: Gambar diatas/bawah teks */
-            gap: 30px;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
+        .hero { background-color: var(--dark); padding: 60px 0; color: var(--white); }
+        .hero-wrap { display: flex; align-items: center; flex-direction: column-reverse; gap: 30px; }
+        .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 15px; }
         .tag {
             display: inline-block; background: rgba(255,255,255,0.1);
             color: var(--primary); padding: 4px 10px; border-radius: 4px;
             font-size: 0.75rem; font-weight: bold; margin-bottom: 15px;
         }
-        
-        /* Cover Image - Simple & Clean */
+        /* Gambar Cover Polos */
         .hero-img img {
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            max-width: 250px; /* Batasi lebar agar tidak terlalu besar di desktop */
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Shadow halus saja */
+            max-width: 250px;
             margin: 0 auto;
         }
 
         /* Grid Layouts */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 30px;
+        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+        
+        /* Grid Benefits (Fix Alignment) */
+        .grid-benefits {
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 30px; 
+            margin-top: 40px;
         }
-        .card {
-            background: var(--bg-light);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
+        .benefit-item {
+            display: flex; gap: 15px; align-items: flex-start;
         }
-        .card-dark {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+        .benefit-icon {
+            min-width: 50px; height: 50px; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 1.4rem; flex-shrink: 0;
         }
 
+        .card { background: var(--bg-light); padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .card-dark { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+
         /* Gallery */
-        .grid-4 {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Mobile 2 kolom */
-            gap: 10px;
-        }
-        .gal-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #eee;
-        }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .gal-item { position: relative; border-radius: 8px; overflow: hidden; background: #eee; }
         .gal-caption {
             position: absolute; bottom: 0; left: 0; width: 100%;
             background: rgba(255,255,255,0.9); padding: 5px;
@@ -158,27 +153,20 @@
         /* Pricing */
         .pricing-card {
             background: linear-gradient(to bottom right, #ffffff, #f1f5f9);
-            border: 4px solid var(--dark);
-            border-radius: 20px;
-            padding: 30px 20px;
-            max-width: 450px;
-            margin: 30px auto 0;
-            text-align: center;
-            color: var(--text-main);
+            border: 4px solid var(--dark); border-radius: 20px;
+            padding: 30px 20px; max-width: 450px; margin: 30px auto 0;
+            text-align: center; color: var(--text-main);
         }
         .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--dark); line-height: 1; }
         .price-old { text-decoration: line-through; color: var(--red); font-size: 0.9rem; }
 
         /* Footer */
-        footer {
-            background: var(--darker); color: #64748b;
-            padding: 40px 0; text-align: center; font-size: 0.8rem;
-        }
+        footer { background: var(--darker); color: #64748b; padding: 40px 0; text-align: center; font-size: 0.8rem; }
 
         /* Mobile Sticky CTA */
         .mobile-cta {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 10px 20px;
+            background: white; padding: 12px 20px;
             border-top: 1px solid #ddd;
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
@@ -190,41 +178,29 @@
             body { padding-bottom: 0; }
             .mobile-cta { display: none; }
             
-            .hero-wrap {
-                flex-direction: row; /* Desktop: Kiri Kanan */
-                text-align: left;
-                justify-content: space-between;
-            }
+            .hero-wrap { flex-direction: row; text-align: left; justify-content: space-between; }
             .hero-text { width: 60%; }
             .hero-img { width: 35%; display: flex; justify-content: flex-end; }
-            .hero-img img { max-width: 100%; width: 280px; }
+            .hero-img img { width: 280px; }
             .hero h1 { font-size: 3.5rem; }
 
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
             .grid-4 { grid-template-columns: repeat(4, 1fr); gap: 20px; }
             
+            /* Grid Benefit Center Fix */
+            .grid-benefits {
+                grid-template-columns: 1fr 1fr; /* 2x2 Grid agar rapi */
+                text-align: center;
+            }
+            .benefit-item {
+                flex-direction: column; /* Icon di atas teks */
+                align-items: center;
+            }
+            
             .flex-row { display: flex; gap: 40px; align-items: center; }
             .w-50 { width: 50%; }
         }
     </style>
-
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1420941069372944');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1420941069372944&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -252,7 +228,7 @@
             </div>
             
             <div class="hero-img">
-                <!-- GAMBAR ASLI TANPA EFEK ANEH -->
+                <!-- GAMBAR ASLI (Flat, Clean) -->
                 <img src="image/cover.png" alt="Cover Ebook" width="280" height="400">
             </div>
         </div>
@@ -380,17 +356,55 @@
         </div>
     </section>
 
-    <!-- BENEFITS -->
+    <!-- BENEFITS (Rapi & Tengah di Desktop) -->
     <section class="section bg-white">
         <div class="container">
             <h2 class="text-center" style="margin-bottom: 30px;">Apa Yang Berubah Setelah Baca Ini?</h2>
-            <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                <div><i class="fas fa-eye text-primary"></i> <strong>Mata "Duit"</strong><br><span style="font-size:0.9rem; color:#64748b;">Melihat potensi uang di setiap sudut rumah.</span></div>
-                <div><i class="fas fa-folder-open text-primary"></i> <strong>Punya Aset</strong><br><span style="font-size:0.9rem; color:#64748b;">Galeri HP jadi gudang stok dagangan.</span></div>
-                <div><i class="fas fa-video text-primary"></i> <strong>Skill Video Simpel</strong><br><span style="font-size:0.9rem; color:#64748b;">Cara rekam video pendek yang dicari editor.</span></div>
-                <div><i class="fas fa-key text-primary"></i> <strong>Kata Kunci Rahasia</strong><br><span style="font-size:0.9rem; color:#64748b;">Cara menamai file agar ditemukan pembeli bule.</span></div>
+            
+            <div class="grid-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon" style="background: #dcfce7; color: var(--green);">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div>
+                        <h4 class="bold">Mata "Duit"</h4>
+                        <p style="font-size: 0.9rem; color: #64748b;">Melihat potensi uang di setiap sudut rumah.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon" style="background: #dbeafe; color: #2563eb;">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div>
+                        <h4 class="bold">Punya Aset</h4>
+                        <p style="font-size: 0.9rem; color: #64748b;">Galeri HP jadi gudang stok dagangan.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon" style="background: #f3e8ff; color: #9333ea;">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div>
+                        <h4 class="bold">Skill Video Simpel</h4>
+                        <p style="font-size: 0.9rem; color: #64748b;">Cara rekam video pendek yang dicari editor.</p>
+                    </div>
+                </div>
+                
+                <!-- BAGIAN INI AKAN RAPI SEJAJAR DI GRID -->
+                <div class="benefit-item">
+                    <div class="benefit-icon" style="background: #ffedd5; color: #ea580c;">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div>
+                        <h4 class="bold">Kata Kunci Rahasia</h4>
+                        <p style="font-size: 0.9rem; color: #64748b;">Cara menamai file agar ditemukan pembeli bule.</p>
+                    </div>
+                </div>
             </div>
-            <div class="text-center" style="margin-top: 30px;">
+
+            <div class="text-center" style="margin-top: 40px;">
                 <a href="#pricing" style="border-bottom: 2px solid var(--primary); font-weight: bold;">Saya Mau Alami Perubahan Ini <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
@@ -465,14 +479,14 @@
         </div>
     </footer>
 
-    <!-- MOBILE CTA (Hanya muncul di HP) -->
+    <!-- MOBILE CTA (Update Text) -->
     <div class="mobile-cta">
         <div>
             <div style="font-size: 0.75rem; text-decoration: line-through; color: #64748b;">Rp 200.000</div>
             <div class="bold" style="font-size: 1.2rem; line-height: 1;">Rp 69.000</div>
         </div>
-        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">
-            BELI SEKARANG
+        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="btn" style="padding: 12px 15px; font-size: 0.85rem;">
+            PELAJARI CARANYA
         </a>
     </div>
 
