@@ -7,6 +7,10 @@
     <meta name="description" content="Satu Foto Bisa Dijual Berkali-kali (Ini Caranya)">
     <meta name="theme-color" content="#0F172A">
 
+    <!-- Preconnect ke Pihak Ketiga (Speed Booster) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://connect.facebook.net">
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -25,34 +29,15 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <!-- Icons Only (FontAwesome CDN) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Icons Only (Non-blocking Load) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
-        /* 1. RESET & SYSTEM FONT (Super Cepat) */
-        :root {
-            --primary: #C5A059;
-            --dark: #0F172A;
-            --darker: #020617;
-            --bg-light: #F8FAFC;
-            --text-main: #334155;
-            --text-light: #94a3b8;
-            --white: #ffffff;
-            --red: #dc2626;
-            --green: #16a34a;
-        }
-
+        /* 1. RESET & SYSTEM FONT */
+        :root { --primary: #C5A059; --dark: #0F172A; --darker: #020617; --bg-light: #F8FAFC; --text-main: #334155; --text-light: #94a3b8; --white: #ffffff; --red: #dc2626; --green: #16a34a; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            /* System Font Stack: Font bawaan HP/Laptop (0 load time) */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 80px; /* Ruang untuk tombol sticky mobile */
-        }
-
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; padding-bottom: 80px; text-rendering: optimizeSpeed; }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; height: auto; display: block; }
         ul { list-style: none; }
@@ -62,27 +47,10 @@
         .text-center { text-align: center; }
         .bold { font-weight: 700; }
         .text-primary { color: var(--primary); }
-        .text-gradient {
-            background: linear-gradient(90deg, #C5A059, #eab308);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .text-gradient { background: linear-gradient(90deg, #C5A059, #eab308); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* 3. BUTTONS */
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: #000;
-            font-weight: 700;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            text-transform: uppercase;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        .btn { display: inline-block; background-color: var(--primary); color: #000; font-weight: 700; padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; border: none; cursor: pointer; transition: opacity 0.2s; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
         .btn-full { width: 100%; text-align: center; }
 
@@ -92,111 +60,47 @@
         .bg-dark { background-color: var(--dark); color: var(--white); }
 
         /* 5. COMPONENTS */
-        /* Sticky Timer */
-        .sticky-bar {
-            background: #b91c1c; color: white; text-align: center;
-            padding: 8px; font-size: 0.85rem; position: sticky; top: 0; z-index: 100;
-        }
-        .timer {
-            background: #7f1d1d; padding: 2px 6px; border-radius: 4px;
-            font-family: monospace; font-weight: bold; margin-left: 5px;
-        }
+        .sticky-bar { background: #b91c1c; color: white; text-align: center; padding: 8px; font-size: 0.85rem; position: sticky; top: 0; z-index: 100; }
+        .timer { background: #7f1d1d; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: bold; margin-left: 5px; }
 
-        /* Hero */
         .hero { background-color: var(--dark); padding: 60px 0; color: var(--white); }
         .hero-wrap { display: flex; align-items: center; flex-direction: column-reverse; gap: 30px; }
         .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 15px; }
-        .tag {
-            display: inline-block; background: rgba(255,255,255,0.1);
-            color: var(--primary); padding: 4px 10px; border-radius: 4px;
-            font-size: 0.75rem; font-weight: bold; margin-bottom: 15px;
-        }
-        /* Gambar Cover Polos */
-        .hero-img img {
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Shadow halus saja */
-            max-width: 250px;
-            margin: 0 auto;
-        }
+        .tag { display: inline-block; background: rgba(255,255,255,0.1); color: var(--primary); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-bottom: 15px; }
+        .hero-img img { border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-width: 250px; margin: 0 auto; }
 
-        /* Grid Layouts */
         .grid-3 { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
-        
-        /* Grid Benefits (Fix Alignment) */
-        .grid-benefits {
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 30px; 
-            margin-top: 40px;
-        }
-        .benefit-item {
-            display: flex; gap: 15px; align-items: flex-start;
-        }
-        .benefit-icon {
-            min-width: 50px; height: 50px; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-size: 1.4rem; flex-shrink: 0;
-        }
+        .grid-benefits { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
+        .benefit-item { display: flex; gap: 15px; align-items: flex-start; }
+        .benefit-icon { min-width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
 
         .card { background: var(--bg-light); padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
         .card-dark { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
 
-        /* Gallery */
         .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .gal-item { position: relative; border-radius: 8px; overflow: hidden; background: #eee; }
-        .gal-caption {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: rgba(255,255,255,0.9); padding: 5px;
-            font-size: 0.7rem; text-align: center; font-weight: bold;
-        }
+        .gal-item { position: relative; border-radius: 8px; overflow: hidden; background: #eee; aspect-ratio: 1/1; }
+        .gal-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gal-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(255,255,255,0.9); padding: 5px; font-size: 0.7rem; text-align: center; font-weight: bold; }
 
-        /* Pricing */
-        .pricing-card {
-            background: linear-gradient(to bottom right, #ffffff, #f1f5f9);
-            border: 4px solid var(--dark); border-radius: 20px;
-            padding: 30px 20px; max-width: 450px; margin: 30px auto 0;
-            text-align: center; color: var(--text-main);
-        }
+        .pricing-card { background: linear-gradient(to bottom right, #ffffff, #f1f5f9); border: 4px solid var(--dark); border-radius: 20px; padding: 30px 20px; max-width: 450px; margin: 30px auto 0; text-align: center; color: var(--text-main); }
         .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--dark); line-height: 1; }
         .price-old { text-decoration: line-through; color: var(--red); font-size: 0.9rem; }
 
-        /* Footer */
         footer { background: var(--darker); color: #64748b; padding: 40px 0; text-align: center; font-size: 0.8rem; }
+        .mobile-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 12px 20px; border-top: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 999; }
 
-        /* Mobile Sticky CTA */
-        .mobile-cta {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 12px 20px;
-            border-top: 1px solid #ddd;
-            display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 999;
-        }
-
-        /* RESPONSIVE DESKTOP */
         @media (min-width: 768px) {
             body { padding-bottom: 0; }
             .mobile-cta { display: none; }
-            
             .hero-wrap { flex-direction: row; text-align: left; justify-content: space-between; }
             .hero-text { width: 60%; }
             .hero-img { width: 35%; display: flex; justify-content: flex-end; }
             .hero-img img { width: 280px; }
             .hero h1 { font-size: 3.5rem; }
-
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
             .grid-4 { grid-template-columns: repeat(4, 1fr); gap: 20px; }
-            
-            /* Grid Benefit Center Fix */
-            .grid-benefits {
-                grid-template-columns: 1fr 1fr; /* 2x2 Grid agar rapi */
-                text-align: center;
-            }
-            .benefit-item {
-                flex-direction: column; /* Icon di atas teks */
-                align-items: center;
-            }
-            
+            .grid-benefits { grid-template-columns: 1fr 1fr; text-align: center; }
+            .benefit-item { flex-direction: column; align-items: center; }
             .flex-row { display: flex; gap: 40px; align-items: center; }
             .w-50 { width: 50%; }
         }
@@ -228,8 +132,8 @@
             </div>
             
             <div class="hero-img">
-                <!-- GAMBAR ASLI (Flat, Clean) -->
-                <img src="image/cover.png" alt="Cover Ebook" width="280" height="400">
+                <!-- Fetchpriority High untuk LCP yang lebih cepat -->
+                <img src="image/cover.png" alt="Cover Ebook" width="280" height="400" fetchpriority="high">
             </div>
         </div>
     </header>
@@ -327,25 +231,25 @@
         </div>
     </section>
 
-    <!-- GALLERY -->
+    <!-- GALLERY (Lazy Load & Async Decoding) -->
     <section class="section">
         <div class="container">
             <h2 class="text-center" style="margin-bottom: 30px;">"Emang Laku Foto Beginian?"</h2>
             <div class="grid-4">
                 <div class="gal-item">
-                    <img src="image/image1.jpg" alt="Foto Kabel" loading="lazy">
+                    <img src="image/image1.jpg" alt="Foto Kabel" loading="lazy" decoding="async" width="200" height="200">
                     <div class="gal-caption">Kabel Ruwet (IT)</div>
                 </div>
                 <div class="gal-item">
-                    <img src="image/image2.jpg" alt="Kopi" loading="lazy">
+                    <img src="image/image2.jpg" alt="Kopi" loading="lazy" decoding="async" width="200" height="200">
                     <div class="gal-caption">Asap Kopi (Morning)</div>
                 </div>
                 <div class="gal-item">
-                    <img src="image/image3.jpg" alt="Aspal" loading="lazy">
+                    <img src="image/image3.jpg" alt="Aspal" loading="lazy" decoding="async" width="200" height="200">
                     <div class="gal-caption">Tekstur Aspal (Industry)</div>
                 </div>
                 <div class="gal-item">
-                    <img src="image/image4.jpg" alt="Cuci Tangan" loading="lazy">
+                    <img src="image/image4.jpg" alt="Cuci Tangan" loading="lazy" decoding="async" width="200" height="200">
                     <div class="gal-caption">Cuci Tangan (Hygiene)</div>
                 </div>
             </div>
@@ -356,7 +260,7 @@
         </div>
     </section>
 
-    <!-- BENEFITS (Rapi & Tengah di Desktop) -->
+    <!-- BENEFITS -->
     <section class="section bg-white">
         <div class="container">
             <h2 class="text-center" style="margin-bottom: 30px;">Apa Yang Berubah Setelah Baca Ini?</h2>
@@ -392,7 +296,6 @@
                     </div>
                 </div>
                 
-                <!-- BAGIAN INI AKAN RAPI SEJAJAR DI GRID -->
                 <div class="benefit-item">
                     <div class="benefit-icon" style="background: #ffedd5; color: #ea580c;">
                         <i class="fas fa-key"></i>
@@ -418,7 +321,7 @@
                 "Dulu saya pikir fotografi itu mahal. Sampai saya sadar, foto tembok retak di belakang rumah saya laku $15. <strong>Dan itu bukan satu-satunya.</strong>"
             </p>
             <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-                <img src="image/tim.jpg" alt="Author" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                <img src="image/tim.jpg" alt="Author" loading="lazy" decoding="async" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
                 <div style="text-align: left;">
                     <div class="bold">Tim Gajian Dari Kamera</div>
                     <div style="font-size: 0.8rem; color: #64748b;">Praktisi Microstock</div>
@@ -479,7 +382,7 @@
         </div>
     </footer>
 
-    <!-- MOBILE CTA (Update Text) -->
+    <!-- MOBILE CTA -->
     <div class="mobile-cta">
         <div>
             <div style="font-size: 0.75rem; text-decoration: line-through; color: #64748b;">Rp 200.000</div>
@@ -505,11 +408,12 @@
                 if (--timer < 0) timer = duration;
             }, 1000);
         }
-        window.onload = function () {
+        
+        // Execute immediately (DOMContentLoaded) instead of waiting for all images (load)
+        document.addEventListener('DOMContentLoaded', function() {
             var display = document.querySelector('#countdown');
             if(display) startTimer(7200, display);
-        };
+        });
     </script>
 </body>
 </html>
-
