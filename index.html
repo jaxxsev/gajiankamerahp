@@ -7,46 +7,62 @@
     <meta name="description" content="Satu Foto Bisa Dijual Berkali-kali (Ini Caranya)">
     <meta name="theme-color" content="#0F172A">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- 1. PRECONNECT: Percepat koneksi ke server pihak ketiga -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
+    <!-- 2. TAILWIND CONFIG: Diletakkan SEBELUM script CDN agar styling langsung diterapkan -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            gold: '#C5A059',
-                            goldLight: '#E5C585',
-                            dark: '#0F172A',
-                            darker: '#020617',
-                            surface: '#F8FAFC',
-                            accent: '#0EA5E9',
-                            danger: '#EF4444',
+        tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        },
+                        colors: {
+                            brand: {
+                                gold: '#C5A059',
+                                goldLight: '#E5C585',
+                                dark: '#0F172A',
+                                darker: '#020617',
+                                surface: '#F8FAFC',
+                                accent: '#0EA5E9',
+                                danger: '#EF4444',
+                            }
+                        },
+                        animation: {
+                            'float': 'float 6s ease-in-out infinite',
+                            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        },
+                        keyframes: {
+                            float: {
+                                '0%, 100%': { transform: 'translateY(0)' },
+                                '50%': { transform: 'translateY(-15px)' },
+                            }
+                        },
+                        boxShadow: {
+                            'glow': '0 0 30px rgba(197, 160, 89, 0.3)',
+                            'card': '0 10px 40px -10px rgba(0,0,0,0.1)',
                         }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        }
-                    },
-                    boxShadow: {
-                        'glow': '0 0 30px rgba(197, 160, 89, 0.3)',
-                        'card': '0 10px 40px -10px rgba(0,0,0,0.1)',
                     }
                 }
             }
         }
     </script>
+    <!-- Script Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 3. NON-BLOCKING FONTS: Font dimuat secara asinkron (tidak memblokir render) -->
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <style>
         .text-gradient {
@@ -192,7 +208,8 @@
                 <div class="w-full lg:w-2/5 flex justify-center items-center py-10">
                     <div class="book-3d animate-float">
                         <div class="book-cover">
-                            <img src="image/cover.png" alt="Cover Ebook Gajian Dari Kamera HP" class="w-full h-full object-cover">
+                            <!-- LCP Optimization: fetchpriority="high" -->
+                            <img src="image/cover.png" alt="Cover Ebook Gajian Dari Kamera HP" class="w-full h-full object-cover" width="200" height="300" fetchpriority="high">
                         </div>
                         <div class="book-spine"></div>
                         <div class="book-pages"></div>
@@ -325,8 +342,9 @@
             </h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <!-- Added loading lazy & dimensions to avoid layout shifts -->
                 <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image1.jpg" alt="Foto Kabel Ruwet" class="w-full h-full object-cover">
+                    <img src="image/image1.jpg" alt="Foto Kabel Ruwet" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Foto Kabel Ruwet</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: IT</div>
@@ -334,7 +352,7 @@
                 </div>
                 
                 <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image2.jpg" alt="Video Asap Kopi" class="w-full h-full object-cover">
+                    <img src="image/image2.jpg" alt="Video Asap Kopi" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Asap Kopi (Video)</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Morning</div>
@@ -342,7 +360,7 @@
                 </div>
                 
                  <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image3.jpg" alt="Tekstur Aspal" class="w-full h-full object-cover">
+                    <img src="image/image3.jpg" alt="Tekstur Aspal" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Tekstur Aspal</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Industry</div>
@@ -350,7 +368,7 @@
                 </div>
                 
                  <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image4.jpg" alt="Cuci Tangan" class="w-full h-full object-cover">
+                    <img src="image/image4.jpg" alt="Cuci Tangan" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Cuci Tangan</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Hygiene</div>
@@ -421,7 +439,7 @@
             </p>
             <div class="flex items-center justify-center gap-4">
                 <div class="w-16 h-16 bg-slate-300 rounded-full overflow-hidden border-2 border-slate-200">
-                    <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" class="w-full h-full object-cover">
+                    <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" class="w-full h-full object-cover" loading="lazy" width="64" height="64">
                 </div>
                 <div class="text-left">
                     <p class="font-bold text-slate-900">Tim Gajian Dari Kamera</p>
@@ -603,7 +621,8 @@
         </div>
     </div>
 
-    <script>
+    <!-- Script diletakkan di bawah -->
+    <script defer>
         function startTimer(duration, display) {
             var timer = duration, hours, minutes, seconds;
             setInterval(function () {
@@ -620,14 +639,17 @@
         window.onload = function () {
             var timeLimit = 60 * 60 * 2; 
             var display = document.querySelector('#countdown');
-            startTimer(timeLimit, display);
+            if(display) startTimer(timeLimit, display);
         };
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
