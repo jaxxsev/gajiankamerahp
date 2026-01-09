@@ -7,314 +7,204 @@
     <meta name="description" content="Satu Foto Bisa Dijual Berkali-kali (Ini Caranya)">
     <meta name="theme-color" content="#0F172A">
 
-    <!-- Font & Icons (Tetap dipertahankan) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons Only (FontAwesome CDN yang stabil) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <!-- CSS MURNI (Ringan & Cepat) -->
     <style>
-        /* 1. RESET & VARIABEL */
+        /* 1. RESET & SYSTEM FONT (Super Cepat) */
         :root {
             --primary: #C5A059;
-            --primary-light: #E5C585;
             --dark: #0F172A;
             --darker: #020617;
-            --surface: #F8FAFC;
+            --bg-light: #F8FAFC;
+            --text-main: #334155;
+            --text-light: #94a3b8;
             --white: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --danger: #EF4444;
-            --success: #16a34a;
-            --container-width: 1100px;
+            --red: #dc2626;
+            --green: #16a34a;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--surface);
+            /* System Font Stack: Menggunakan font bawaan perangkat (0 load time) */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 80px; /* Space for mobile CTA */
+            padding-bottom: 70px; /* Ruang untuk tombol sticky mobile */
         }
 
-        html { scroll-behavior: smooth; }
-        img { max-width: 100%; display: block; }
-        a { text-decoration: none; transition: 0.3s; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+        ul { list-style: none; }
 
-        /* 2. UTILITY CLASSES */
+        /* 2. UTILITY */
         .container {
-            max-width: var(--container-width);
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
         .text-center { text-align: center; }
+        .bold { font-weight: 700; }
+        .text-primary { color: var(--primary); }
         .text-gradient {
-            background: linear-gradient(to right, var(--primary), #FCD34D, var(--primary));
+            background: linear-gradient(90deg, #C5A059, #eab308);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
         }
-        
-        /* 3. COMPONENTS */
+
+        /* 3. BUTTONS */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            display: inline-block;
             background-color: var(--primary);
-            color: var(--darker);
+            color: #000;
             font-weight: 700;
-            padding: 16px 32px;
-            border-radius: 12px;
+            padding: 15px 30px;
+            border-radius: 8px;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .btn:hover {
-            background-color: var(--white);
-            transform: translateY(-2px);
-        }
-        .btn-full { width: 100%; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-full { width: 100%; text-align: center; }
 
-        /* 4. STICKY TIMER */
-        .sticky-timer {
-            background-color: #b91c1c;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        /* 4. SECTIONS */
+        .section { padding: 50px 0; }
+        .bg-white { background-color: var(--white); }
+        .bg-dark { background-color: var(--dark); color: var(--white); }
+
+        /* 5. COMPONENTS */
+        /* Sticky Timer */
+        .sticky-bar {
+            background: #b91c1c; color: white; text-align: center;
+            padding: 8px; font-size: 0.85rem; position: sticky; top: 0; z-index: 100;
         }
-        .timer-box {
-            background: #7f1d1d;
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid #ef4444;
-            font-family: monospace;
-            font-weight: bold;
-            margin-left: 5px;
+        .timer {
+            background: #7f1d1d; padding: 2px 6px; border-radius: 4px;
+            font-family: monospace; font-weight: bold; margin-left: 5px;
         }
 
-        /* 5. HERO SECTION */
+        /* Hero */
         .hero {
             background-color: var(--dark);
-            background-image: radial-gradient(at 0% 0%, rgba(197, 160, 89, 0.15) 0px, transparent 50%),
-                              radial-gradient(#1e293b 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px;
-            padding: 60px 0 80px;
-            color: white;
-            overflow: hidden;
+            padding: 60px 0;
+            color: var(--white);
         }
-        .hero-content {
+        .hero-wrap {
             display: flex;
-            flex-direction: column-reverse;
             align-items: center;
-            gap: 40px;
+            flex-direction: column-reverse; /* Mobile: Gambar diatas/bawah teks */
+            gap: 30px;
         }
-        .hero-text h1 {
-            font-size: 2.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
+        .hero h1 {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
         }
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(234, 179, 8, 0.1);
-            border: 1px solid rgba(234, 179, 8, 0.3);
-            color: var(--primary);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+        .tag {
+            display: inline-block; background: rgba(255,255,255,0.1);
+            color: var(--primary); padding: 4px 10px; border-radius: 4px;
+            font-size: 0.75rem; font-weight: bold; margin-bottom: 15px;
         }
-        .hero-sub {
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        /* 3D Book CSS */
-        .book-container { perspective: 1000px; padding: 20px; }
-        .book-3d {
-            position: relative;
-            width: 200px;
-            height: 300px;
-            transform-style: preserve-3d;
-            transform: rotateY(-30deg) rotateX(10deg);
-            transition: transform 0.5s;
-        }
-        .book-3d:hover { transform: rotateY(-20deg) rotateX(5deg) scale(1.05); }
-        .book-cover {
-            position: absolute; width: 100%; height: 100%;
-            background: #0f172a; border-radius: 4px 12px 12px 4px;
-            border: 2px solid var(--primary);
-            box-shadow: inset 5px 0 10px rgba(0,0,0,0.5);
-            overflow: hidden;
-        }
-        .book-spine {
-            position: absolute; left: 0; top: 0; width: 30px; height: 100%;
-            background: var(--primary);
-            transform: rotateY(-90deg) translateZ(-15px);
-        }
-        .book-pages {
-            position: absolute; right: 0; top: 2%; width: 28px; height: 96%;
-            background: #fff;
-            transform: rotateY(90deg) translateZ(-14px);
-            background-image: repeating-linear-gradient(to right, #ccc 0px, #ccc 1px, #fff 1px, #fff 3px);
-        }
-
-        /* 6. GRID SECTIONS */
-        .section { padding: 60px 0; }
-        .bg-white { background: var(--white); }
         
+        /* Cover Image - Simple & Clean */
+        .hero-img img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 250px; /* Batasi lebar agar tidak terlalu besar di desktop */
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: 1fr;
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
-        
         .card {
-            background: var(--surface);
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid var(--danger);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
         }
-        .card h4 { font-size: 1.2rem; margin: 15px 0 10px; color: var(--dark); }
-        .card-icon { font-size: 2rem; color: var(--dark); }
-
-        .process-card {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 0.3s;
-        }
-        .process-card:hover { transform: translateY(-5px); }
-        .step-num {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            width: 35px; height: 35px; background: var(--dark); color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: bold; border: 3px solid var(--white);
-        }
-
-        /* 7. DARK SECTION */
-        .bg-dark { background: var(--dark); color: white; position: relative; }
-        .flex-row { display: flex; flex-direction: column; gap: 40px; }
-        .dark-card {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #334155;
-            text-align: center;
-        }
-        .option-box {
+        .card-dark {
             background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            text-align: left;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* 8. GALLERY */
+        /* Gallery */
         .grid-4 {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            grid-template-columns: 1fr 1fr; /* Mobile 2 kolom */
+            gap: 10px;
         }
-        .gallery-item {
-            background: #cbd5e1;
+        .gal-item {
+            position: relative;
             border-radius: 8px;
             overflow: hidden;
-            position: relative;
-            aspect-ratio: 1/1;
+            background: #eee;
         }
-        .gallery-caption {
+        .gal-caption {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            background: rgba(255,255,255,0.95);
-            padding: 8px;
-            text-align: center;
-            font-size: 0.8rem;
+            background: rgba(255,255,255,0.9); padding: 5px;
+            font-size: 0.7rem; text-align: center; font-weight: bold;
         }
 
-        /* 9. PRICING */
-        .pricing-box {
-            background: linear-gradient(135deg, #f8fafc, #ffffff);
+        /* Pricing */
+        .pricing-card {
+            background: linear-gradient(to bottom right, #ffffff, #f1f5f9);
             border: 4px solid var(--dark);
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 40px auto 0;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            position: relative;
-        }
-        .promo-badge {
-            position: absolute; top: 0; right: 0;
-            background: var(--danger); color: white;
-            font-weight: bold; font-size: 0.8rem;
-            padding: 5px 30px;
-            transform: translate(20px, 15px) rotate(45deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .price-display {
+            border-radius: 20px;
+            padding: 30px 20px;
+            max-width: 450px;
+            margin: 30px auto 0;
             text-align: center;
-            border-bottom: 2px dashed #cbd5e1;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            color: var(--text-main);
         }
-        .big-price { font-size: 4rem; font-weight: 800; color: var(--dark); line-height: 1; }
-        .strike { text-decoration: line-through; color: var(--danger); font-size: 0.9rem; }
-        .save-badge {
-            background: #fef9c3; color: #854d0e;
-            display: inline-block; padding: 4px 12px; border-radius: 20px;
-            font-size: 0.8rem; font-weight: bold; margin-top: 10px;
+        .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--dark); line-height: 1; }
+        .price-old { text-decoration: line-through; color: var(--red); font-size: 0.9rem; }
+
+        /* Footer */
+        footer {
+            background: var(--darker); color: #64748b;
+            padding: 40px 0; text-align: center; font-size: 0.8rem;
         }
 
-        /* 10. FOOTER & MOBILE CTA */
-        footer {
-            background: var(--darker);
-            color: var(--text-muted);
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            border-top: 1px solid #1e293b;
-        }
+        /* Mobile Sticky CTA */
         .mobile-cta {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 12px;
-            border-top: 1px solid #e2e8f0;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-            display: flex; gap: 10px; align-items: center;
+            background: white; padding: 10px 20px;
+            border-top: 1px solid #ddd;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
             z-index: 999;
         }
-        .mobile-price { flex: 1; }
-        .mobile-price .old { font-size: 0.7rem; text-decoration: line-through; color: #64748b; }
-        .mobile-price .new { font-size: 1.2rem; font-weight: 800; color: var(--dark); line-height: 1; }
-        .mobile-btn { flex: 2; padding: 12px; font-size: 0.9rem; }
 
-        /* RESPONSIVE MEDIA QUERIES */
+        /* RESPONSIVE DESKTOP */
         @media (min-width: 768px) {
             body { padding-bottom: 0; }
             .mobile-cta { display: none; }
-            .hero-content { flex-direction: row; text-align: left; }
-            .hero-text h1 { font-size: 3.5rem; }
+            
+            .hero-wrap {
+                flex-direction: row; /* Desktop: Kiri Kanan */
+                text-align: left;
+                justify-content: space-between;
+            }
+            .hero-text { width: 60%; }
+            .hero-img { width: 35%; display: flex; justify-content: flex-end; }
+            .hero-img img { max-width: 100%; width: 280px; }
+            .hero h1 { font-size: 3.5rem; }
+
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
-            .grid-4 { grid-template-columns: repeat(4, 1fr); }
-            .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
-            .flex-row { flex-direction: row; }
-            .w-half { width: 50%; }
+            .grid-4 { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+            
+            .flex-row { display: flex; gap: 40px; align-items: center; }
+            .w-50 { width: 50%; }
         }
     </style>
 
@@ -335,364 +225,220 @@
     src="https://www.facebook.com/tr?id=1420941069372944&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-
 </head>
 <body>
 
-    <!-- TIMER -->
-    <div class="sticky-timer">
-        <i class="fas fa-hourglass-half"></i> Waktu Fokus Anda Hari Ini: <span id="countdown" class="timer-box">02:00:00</span>
-        <div style="font-size: 10px; opacity: 0.8; margin-top: 4px; font-weight: normal;">*Timer ini hanya pengingat fokus, bukan batasan promo.</div>
+    <!-- Sticky Timer -->
+    <div class="sticky-bar">
+        <span><i class="fas fa-hourglass-half"></i> Waktu Fokus: <span id="countdown" class="timer">02:00:00</span></span>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <header class="hero">
-        <div class="container hero-content">
-            <div class="hero-text w-half">
-                <div class="hero-tag">
-                    <i class="fas fa-bolt"></i> Untuk Pengguna Android & iPhone
-                </div>
+        <div class="container hero-wrap">
+            <div class="hero-text">
+                <div class="tag"><i class="fas fa-bolt"></i> Untuk Pengguna Android & iPhone</div>
                 <h1>GAJIAN DARI <br><span class="text-gradient">KAMERA HP</span></h1>
-                <p class="hero-sub">Tanpa kamera mahal • Tanpa pengalaman • Bisa dipelajari pemula</p>
-                <div style="color: #cbd5e1; margin-bottom: 30px;">
-                    <h3 style="font-size: 1.2rem; font-weight: 500;">Satu Foto HP Bisa Dijual Berkali-kali.</h3>
-                    <p style="font-style: italic; font-size: 0.9rem; color: #94a3b8;">Tanpa Latar Belakang Fotografi Profesional.</p>
-                </div>
-                <a href="#pricing" class="btn">
-                    Ambil Ebooknya Sekarang <i class="fas fa-arrow-right"></i>
-                </a>
-                <p style="font-size: 0.8rem; color: #64748b; margin-top: 15px;">
-                    <i class="fas fa-lock" style="color: var(--primary);"></i> 100% Downloadable PDF. Akses Selamanya.
+                <p class="text-light bold" style="letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 20px;">
+                    TANPA KAMERA MAHAL • TANPA PENGALAMAN
                 </p>
+                <h3 style="font-weight: 500; font-size: 1.2rem; margin-bottom: 5px;">Satu Foto HP Bisa Dijual Berkali-kali.</h3>
+                <p style="color: #94a3b8; font-style: italic; margin-bottom: 30px;">Tanpa Latar Belakang Fotografi Profesional.</p>
+                
+                <div style="margin-bottom: 10px;">
+                    <a href="#pricing" class="btn">Ambil Ebooknya Sekarang <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <p style="font-size: 0.8rem; color: #64748b;"><i class="fas fa-lock text-primary"></i> 100% Downloadable PDF.</p>
             </div>
             
-            <div class="book-container w-half" style="display: flex; justify-content: center;">
-                <div class="book-3d">
-                    <div class="book-cover">
-                        <img src="image/cover.png" alt="Cover Ebook Gajian Dari Kamera HP" style="width:100%; height:100%; object-fit: cover;">
-                    </div>
-                    <div class="book-spine"></div>
-                    <div class="book-pages"></div>
-                </div>
+            <div class="hero-img">
+                <!-- GAMBAR ASLI TANPA EFEK ANEH -->
+                <img src="image/cover.png" alt="Cover Ebook" width="280" height="400">
             </div>
         </div>
     </header>
 
-    <!-- PROBLEM -->
+    <!-- PROBLEM SECTION -->
     <section class="section bg-white">
         <div class="container">
-            <div class="text-center" style="max-width: 800px; margin: 0 auto;">
-                <h3 style="color: var(--danger); letter-spacing: 2px; font-size: 0.9rem;">WARNING</h3>
-                <h2 style="font-size: 1.8rem; margin-top: 10px; color: var(--dark);">3 Kesalahan Fatal Mengapa Foto Anda <br>Hanya Jadi "Sampah Memori"</h2>
+            <div class="text-center" style="margin-bottom: 30px;">
+                <p style="color: var(--red); font-weight: bold; font-size: 0.9rem; letter-spacing: 2px;">WARNING</p>
+                <h2 style="font-size: 1.8rem; line-height: 1.2;">3 Kesalahan Fatal Mengapa Foto Anda <br>Hanya Jadi "Sampah Memori"</h2>
             </div>
             
             <div class="grid-3">
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-camera"></i></div>
-                    <h4>Terjebak Alat</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Mengira harus punya kamera 20 juta dulu baru bisa mulai. Padahal pasar butuh visual yang otentik, bukan yang "terlalu sempurna".</p>
+                    <i class="fas fa-camera text-center" style="font-size: 2rem; color: var(--dark); display:block; margin-bottom: 15px;"></i>
+                    <h4 class="bold">Terjebak Alat</h4>
+                    <p style="font-size: 0.9rem; color: #64748b;">Mengira harus punya kamera 20 juta dulu baru bisa mulai. Padahal pasar butuh visual yang otentik.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-thumbs-up"></i></div>
-                    <h4>Mental Sosmed</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Sibuk cari Like & Comment di Instagram yang tidak membayar tagihan. Aset digital dibayar Dollar, bukan jempol.</p>
+                    <i class="fas fa-thumbs-up text-center" style="font-size: 2rem; color: var(--dark); display:block; margin-bottom: 15px;"></i>
+                    <h4 class="bold">Mental Sosmed</h4>
+                    <p style="font-size: 0.9rem; color: #64748b;">Sibuk cari Like & Comment di Instagram yang tidak membayar tagihan. Aset digital dibayar Dollar.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-brain"></i></div>
-                    <h4>Buta Aset</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Punya fotonya, tapi tidak tahu cara mengemas dan menawarkannya. Akibatnya foto hanya menumpuk memenuhi memori HP.</p>
+                    <i class="fas fa-brain text-center" style="font-size: 2rem; color: var(--dark); display:block; margin-bottom: 15px;"></i>
+                    <h4 class="bold">Buta Aset</h4>
+                    <p style="font-size: 0.9rem; color: #64748b;">Punya fotonya, tapi tidak tahu cara mengemas dan menawarkannya. Akibatnya foto hanya menumpuk.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROCESS -->
+    <!-- PROCESS SECTION -->
     <section class="section">
         <div class="container">
             <div class="text-center">
-                <span style="color: var(--primary); font-weight: bold; letter-spacing: 1px;">PROSES SIMPLE</span>
-                <h2 style="font-size: 2rem; color: var(--dark);">Cara Kerjanya Sederhana:</h2>
+                <span class="text-primary bold">PROSES SIMPLE</span>
+                <h2>Cara Kerjanya Sederhana:</h2>
             </div>
             
-            <div class="process-grid grid-3"> <!-- Fallback to grid-3 on mobile via CSS logic -->
-                <div class="process-card">
-                    <div class="step-num">1</div>
-                    <i class="fas fa-mobile-alt" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+            <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="card text-center" style="background: white;">
+                    <span style="background:var(--dark); color:white; width:30px; height:30px; border-radius:50%; display:inline-block; line-height:30px; font-weight:bold; margin-bottom:10px;">1</span>
                     <h4>Ambil Foto Pakai HP</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Gunakan objek di sekitar rumah Anda.</p>
+                    <p style="font-size: 0.85rem; color: #64748b;">Gunakan objek di sekitar rumah Anda.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-num">2</div>
-                    <i class="fas fa-magic" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <div class="card text-center" style="background: white;">
+                    <span style="background:var(--dark); color:white; width:30px; height:30px; border-radius:50%; display:inline-block; line-height:30px; font-weight:bold; margin-bottom:10px;">2</span>
                     <h4>Edit Ringan</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Tanpa skill rumit, cukup perbaiki cahaya.</p>
+                    <p style="font-size: 0.85rem; color: #64748b;">Tanpa skill rumit, cukup perbaiki cahaya.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-num">3</div>
-                    <i class="fas fa-cloud-upload-alt" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <div class="card text-center" style="background: white;">
+                    <span style="background:var(--dark); color:white; width:30px; height:30px; border-radius:50%; display:inline-block; line-height:30px; font-weight:bold; margin-bottom:10px;">3</span>
                     <h4>Upload</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Ke platform khusus yang diajarkan.</p>
+                    <p style="font-size: 0.85rem; color: #64748b;">Ke platform khusus yang diajarkan.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-num" style="background: var(--success);">4</div>
-                    <i class="fas fa-sack-dollar" style="font-size: 2.5rem; color: var(--success); margin-bottom: 15px;"></i>
+                <div class="card text-center" style="background: white;">
+                    <span style="background:var(--green); color:white; width:30px; height:30px; border-radius:50%; display:inline-block; line-height:30px; font-weight:bold; margin-bottom:10px;">4</span>
                     <h4>Jadi Aset Digital</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Foto siap menghasilkan pasif income.</p>
+                    <p style="font-size: 0.85rem; color: #64748b;">Foto siap menghasilkan pasif income.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WHY NOW (Dark) -->
+    <!-- REALITY (Dark Section) -->
     <section class="section bg-dark">
         <div class="container flex-row">
-            <div class="w-half" style="width: 100%;">
-                <span style="color: var(--primary); font-weight: bold; letter-spacing: 1px;">REALITAS PASAR 2026</span>
-                <h2 style="font-size: 2rem; margin: 10px 0 20px;">Kenapa Harus Mulai SEKARANG?</h2>
-                
-                <div style="margin-bottom: 20px; display: flex; gap: 15px;">
-                    <div style="min-width: 40px; height: 40px; background: rgba(197, 160, 89, 0.2); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fas fa-robot"></i></div>
-                    <div>
-                        <strong style="display: block; font-size: 1.1rem;">Era AI Butuh Stok Nyata</strong>
-                        <p style="font-size: 0.9rem; color: #cbd5e1;">AI memang canggih, tapi terlihat palsu. Industri kreatif makin haus akan foto/video "Human Touch" yang nyata dari kamera HP Anda.</p>
-                    </div>
+            <div class="w-50">
+                <span class="text-primary bold">REALITAS PASAR 2026</span>
+                <h2 style="margin-bottom: 20px;">Kenapa Harus Mulai SEKARANG?</h2>
+                <div style="margin-bottom: 20px;">
+                    <p class="bold" style="margin-bottom: 5px;"><i class="fas fa-robot text-primary"></i> Era AI Butuh Stok Nyata</p>
+                    <p style="font-size: 0.9rem; color: #cbd5e1;">AI memang canggih, tapi terlihat palsu. Industri kreatif makin haus akan foto/video "Human Touch" yang nyata.</p>
                 </div>
-                <div style="margin-bottom: 20px; display: flex; gap: 15px;">
-                    <div style="min-width: 40px; height: 40px; background: rgba(197, 160, 89, 0.2); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 8px;"><i class="fas fa-chart-line"></i></div>
-                    <div>
-                        <strong style="display: block; font-size: 1.1rem;">Momentum Global</strong>
-                        <p style="font-size: 0.9rem; color: #cbd5e1;">Platform aset digital sedang gencar mencari konten dari kreator Asia (unik & eksotis). Jangan sampai momentum ini lewat.</p>
-                    </div>
+                <div>
+                    <p class="bold" style="margin-bottom: 5px;"><i class="fas fa-chart-line text-primary"></i> Momentum Global</p>
+                    <p style="font-size: 0.9rem; color: #cbd5e1;">Platform aset digital sedang gencar mencari konten dari kreator Asia (unik & eksotis).</p>
                 </div>
             </div>
-            
-            <div class="w-half dark-card" style="width: 100%;">
-                <h3 style="margin-bottom: 20px;">Pilihan Di Tangan Anda</h3>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <div class="option-box" style="border: 1px solid rgba(239, 68, 68, 0.3); width: 50%;">
-                        <p style="color: var(--danger); font-weight: bold; font-size: 0.8rem;">OPSI A</p>
-                        <p style="font-size: 0.8rem; color: #cbd5e1;">HP cuma buat scroll TikTok & main game.</p>
+            <div class="w-50 card card-dark text-center">
+                <h3>Pilihan Di Tangan Anda</h3>
+                <div style="margin: 20px 0; text-align: left;">
+                    <div style="background: rgba(220, 38, 38, 0.2); padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                        <span style="color: #fca5a5; font-weight: bold; font-size: 0.8rem;">OPSI A</span>
+                        <p style="font-size: 0.85rem;">HP cuma buat scroll TikTok & main game.</p>
                     </div>
-                    <div class="option-box" style="border: 1px solid rgba(22, 163, 74, 0.3); width: 50%;">
-                        <p style="color: var(--success); font-weight: bold; font-size: 0.8rem;">OPSI B</p>
-                        <p style="font-size: 0.8rem; color: #cbd5e1;">HP jadi "karyawan" yang kerja 24 jam.</p>
+                    <div style="background: rgba(22, 163, 74, 0.2); padding: 10px; border-radius: 5px;">
+                        <span style="color: #86efac; font-weight: bold; font-size: 0.8rem;">OPSI B</span>
+                        <p style="font-size: 0.85rem;">HP jadi "karyawan" yang kerja 24 jam.</p>
                     </div>
                 </div>
                 <a href="#pricing" class="btn btn-full">SAYA PILIH OPSI B</a>
             </div>
         </div>
-        <div class="text-center" style="margin-top: 30px;">
-            <a href="#pricing" style="color: var(--primary); text-decoration: underline;">Saya tidak mau ketinggalan momentum ini &rarr;</a>
-        </div>
     </section>
 
-    <!-- EXAMPLES -->
+    <!-- GALLERY -->
     <section class="section">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 30px; color: var(--dark);">"Emang Laku Foto Beginian?"</h2>
-            
+            <h2 class="text-center" style="margin-bottom: 30px;">"Emang Laku Foto Beginian?"</h2>
             <div class="grid-4">
-                <div class="gallery-item">
-                    <img src="image/image1.jpg" alt="Foto Kabel Ruwet" style="width:100%; height:100%; object-fit: cover;">
-                    <div class="gallery-caption">
-                        <strong>Foto Kabel Ruwet</strong><br>
-                        <span style="background: #dcfce7; color: var(--success); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">Konsep: IT</span>
-                    </div>
+                <div class="gal-item">
+                    <img src="image/image1.jpg" alt="Foto Kabel" loading="lazy">
+                    <div class="gal-caption">Kabel Ruwet (IT)</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="image/image2.jpg" alt="Video Asap Kopi" style="width:100%; height:100%; object-fit: cover;">
-                    <div class="gallery-caption">
-                        <strong>Asap Kopi (Video)</strong><br>
-                        <span style="background: #dcfce7; color: var(--success); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">Konsep: Morning</span>
-                    </div>
+                <div class="gal-item">
+                    <img src="image/image2.jpg" alt="Kopi" loading="lazy">
+                    <div class="gal-caption">Asap Kopi (Morning)</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="image/image3.jpg" alt="Tekstur Aspal" style="width:100%; height:100%; object-fit: cover;">
-                    <div class="gallery-caption">
-                        <strong>Tekstur Aspal</strong><br>
-                        <span style="background: #dcfce7; color: var(--success); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">Konsep: Industry</span>
-                    </div>
+                <div class="gal-item">
+                    <img src="image/image3.jpg" alt="Aspal" loading="lazy">
+                    <div class="gal-caption">Tekstur Aspal (Industry)</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="image/image4.jpg" alt="Cuci Tangan" style="width:100%; height:100%; object-fit: cover;">
-                    <div class="gallery-caption">
-                        <strong>Cuci Tangan</strong><br>
-                        <span style="background: #dcfce7; color: var(--success); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">Konsep: Hygiene</span>
-                    </div>
+                <div class="gal-item">
+                    <img src="image/image4.jpg" alt="Cuci Tangan" loading="lazy">
+                    <div class="gal-caption">Cuci Tangan (Hygiene)</div>
                 </div>
             </div>
-
-            <div style="background: var(--white); padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; margin-top: 30px;">
-                <p style="color: var(--dark); margin-bottom: 10px;">
-                    Objek di atas ada di sekitar Anda, kan? <br>
-                    Di buku ini, saya bongkar <strong>50+ Ide Objek Lainnya</strong> yang ada di rumah Anda.
-                </p>
-                <a href="#pricing" style="color: #0EA5E9; font-weight: bold; text-decoration: underline;">Saya Mau Daftar Ide Foto-nya &raquo;</a>
+            <div class="text-center" style="margin-top: 20px;">
+                <p>Di buku ini, saya bongkar <strong>50+ Ide Objek Lainnya</strong>.</p>
+                <a href="#pricing" class="text-primary bold" style="text-decoration: underline;">Saya Mau Daftar Ide Foto-nya &raquo;</a>
             </div>
         </div>
     </section>
 
     <!-- BENEFITS -->
-    <section class="section bg-white" style="border-top: 1px solid #e2e8f0;">
+    <section class="section bg-white">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 30px; color: var(--dark);">Apa Yang Berubah Setelah Baca Buku Ini?</h2>
-            
-            <div class="grid-3" style="grid-template-columns: repeat(2, 1fr);"> <!-- Manual override for 2 cols -->
-                <div style="display: flex; gap: 15px;">
-                    <div style="min-width: 50px; height: 50px; background: #dcfce7; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;"><i class="fas fa-eye"></i></div>
-                    <div>
-                        <h4 style="color: var(--dark);">Mata "Duit"</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Anda tidak lagi melihat "sampah" atau "berantakan". Anda melihat tekstur, konsep, dan potensi uang.</p>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 15px;">
-                    <div style="min-width: 50px; height: 50px; background: #dbeafe; color: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;"><i class="fas fa-folder-open"></i></div>
-                    <div>
-                        <h4 style="color: var(--dark);">Punya Aset, Bukan File</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Galeri HP Anda bukan lagi tempat memori penuh yang sia-sia, tapi gudang stok dagangan.</p>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 15px;">
-                    <div style="min-width: 50px; height: 50px; background: #f3e8ff; color: #9333ea; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;"><i class="fas fa-video"></i></div>
-                    <div>
-                        <h4 style="color: var(--dark);">Skill Videografi Simpel</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Paham cara rekam video pendek 10 detik yang stabil, tajam, dan dicari editor video.</p>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 15px;">
-                    <div style="min-width: 50px; height: 50px; background: #ffedd5; color: #ea580c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;"><i class="fas fa-key"></i></div>
-                    <div>
-                        <h4 style="color: var(--dark);">Kata Kunci Rahasia</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Tahu cara menamai file (metadata) agar mudah ditemukan pembeli bule.</p>
-                    </div>
-                </div>
+            <h2 class="text-center" style="margin-bottom: 30px;">Apa Yang Berubah Setelah Baca Ini?</h2>
+            <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div><i class="fas fa-eye text-primary"></i> <strong>Mata "Duit"</strong><br><span style="font-size:0.9rem; color:#64748b;">Melihat potensi uang di setiap sudut rumah.</span></div>
+                <div><i class="fas fa-folder-open text-primary"></i> <strong>Punya Aset</strong><br><span style="font-size:0.9rem; color:#64748b;">Galeri HP jadi gudang stok dagangan.</span></div>
+                <div><i class="fas fa-video text-primary"></i> <strong>Skill Video Simpel</strong><br><span style="font-size:0.9rem; color:#64748b;">Cara rekam video pendek yang dicari editor.</span></div>
+                <div><i class="fas fa-key text-primary"></i> <strong>Kata Kunci Rahasia</strong><br><span style="font-size:0.9rem; color:#64748b;">Cara menamai file agar ditemukan pembeli bule.</span></div>
             </div>
-            
-            <div class="text-center" style="margin-top: 40px;">
-                <a href="#pricing" style="color: var(--dark); font-weight: bold; border-bottom: 2px solid var(--primary);">Saya Mau Alami Perubahan Ini <i class="fas fa-arrow-right"></i></a>
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="#pricing" style="border-bottom: 2px solid var(--primary); font-weight: bold;">Saya Mau Alami Perubahan Ini <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
     <!-- AUTHOR -->
     <section class="section">
-        <div class="container text-center" style="max-width: 700px;">
-            <h3 style="font-size: 0.9rem; color: #94a3b8; letter-spacing: 2px; margin-bottom: 10px;">SIAPA DIBALIK BUKU INI?</h3>
-            <p style="font-size: 1.4rem; font-family: serif; font-style: italic; color: var(--dark); margin-bottom: 30px;">
+        <div class="container text-center">
+            <p class="bold" style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 10px;">SIAPA DIBALIK BUKU INI?</p>
+            <p style="font-size: 1.2rem; font-style: italic; max-width: 700px; margin: 0 auto 20px;">
                 "Dulu saya pikir fotografi itu mahal. Sampai saya sadar, foto tembok retak di belakang rumah saya laku $15. <strong>Dan itu bukan satu-satunya.</strong>"
             </p>
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-                <div style="width: 70px; height: 70px; border-radius: 50%; overflow: hidden; border: 3px solid #e2e8f0;">
-                    <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+                <img src="image/tim.jpg" alt="Author" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
                 <div style="text-align: left;">
-                    <p style="font-weight: bold; color: var(--dark);">Tim Gajian Dari Kamera</p>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Praktisi Microstock & Mobile Photographer</p>
-                    <p style="font-size: 0.7rem; color: #94a3b8; font-style: italic; margin-top: 5px;">*Beberapa karya penulis sudah terjual di marketplace aset digital.</p>
+                    <div class="bold">Tim Gajian Dari Kamera</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">Praktisi Microstock</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="section bg-white">
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="section bg-dark">
         <div class="container">
-            <h3 class="text-center" style="color: var(--dark); margin-bottom: 30px;">Apa Kata Mereka?</h3>
-            <div class="grid-3">
-                <div class="card" style="border: 1px solid #e2e8f0; border-left: none; box-shadow: none;">
-                    <div style="color: var(--primary); font-size: 0.8rem; margin-bottom: 10px;">⭐⭐⭐⭐⭐</div>
-                    <p style="font-size: 0.9rem; font-style: italic; color: var(--text-muted);">"Gak nyangka foto sisa masakan bisa laku. Bukunya to the point."</p>
-                    <p style="font-weight: bold; font-size: 0.9rem; margin-top: 10px;">- Reza, Karyawan</p>
-                </div>
-                <div class="card" style="border: 1px solid #e2e8f0; border-left: none; box-shadow: none;">
-                    <div style="color: var(--primary); font-size: 0.8rem; margin-bottom: 10px;">⭐⭐⭐⭐⭐</div>
-                    <p style="font-size: 0.9rem; font-style: italic; color: var(--text-muted);">"Bahasa-nya enak, gak pake istilah fotografi ribet. Cocok buat pemula kayak saya."</p>
-                    <p style="font-weight: bold; font-size: 0.9rem; margin-top: 10px;">- Susanto, Wiraswasta</p>
-                </div>
-                <div class="card" style="border: 1px solid #e2e8f0; border-left: none; box-shadow: none;">
-                    <div style="color: var(--primary); font-size: 0.8rem; margin-bottom: 10px;">⭐⭐⭐⭐⭐</div>
-                    <p style="font-size: 0.9rem; font-style: italic; color: var(--text-muted);">"Baru praktek 3 hari, galeri HP udah mulai rapi jadi aset."</p>
-                    <p style="font-weight: bold; font-size: 0.9rem; margin-top: 10px;">- Yenita, Mahasiswa</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section" style="background: #f1f5f9; border-top: 1px solid #e2e8f0;">
-        <div class="container text-center" style="max-width: 800px;">
-            <h3 style="color: var(--dark); margin-bottom: 30px;">Yang Sering Ditanyakan (FAQ)</h3>
-            <div class="grid-3">
-                <div class="process-card">
-                    <p style="font-weight: bold; font-size: 0.9rem; margin-bottom: 5px;"><i class="fas fa-camera" style="color: var(--primary);"></i> Harus Kamera Bagus?</p>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Tidak. HP 2-3 jutaan sudah sangat cukup asal cahayanya baik.</p>
-                </div>
-                <div class="process-card">
-                    <p style="font-weight: bold; font-size: 0.9rem; margin-bottom: 5px;"><i class="fas fa-clock" style="color: var(--primary);"></i> Berapa Lama Mulai?</p>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Setelah baca, hari ini juga Anda bisa mulai hunting aset di rumah.</p>
-                </div>
-                <div class="process-card">
-                    <p style="font-weight: bold; font-size: 0.9rem; margin-bottom: 5px;"><i class="fas fa-user-check" style="color: var(--primary);"></i> Cocok Pemula?</p>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Sangat. Bahasa buku ini dibuat khusus untuk orang awam/gaptek.</p>
-                </div>
-            </div>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #64748b;">Jika pertanyaan Anda sudah terjawab, silakan lanjutkan di bawah ini: <br> <i class="fas fa-chevron-down" style="color: var(--primary); margin-top: 5px;"></i></p>
-        </div>
-    </section>
-
-    <!-- NOT PROMISE -->
-    <section style="background: var(--dark); padding: 40px 0;">
-        <div class="container">
-            <div style="background: #1e293b; border: 1px solid #334155; padding: 30px; border-radius: 12px; max-width: 600px; margin: 0 auto; text-align: center; overflow: hidden; position: relative;">
-                <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(239, 68, 68, 0.2); border-radius: 50%; filter: blur(20px);"></div>
-                <h3 style="color: white; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 15px; text-transform: uppercase;">
-                    Apa Yang <span style="color: #f87171; text-decoration: underline;">TIDAK</span> Akan Anda Dapatkan
-                </h3>
-                <ul style="color: #cbd5e1; font-size: 0.9rem; list-style: none; text-align: left; display: inline-block;">
-                    <li style="margin-bottom: 8px;"><i class="fas fa-times" style="color: var(--danger); margin-right: 8px;"></i> Janji kaya cepat dalam semalam (Get Rich Quick).</li>
-                    <li style="margin-bottom: 8px;"><i class="fas fa-times" style="color: var(--danger); margin-right: 8px;"></i> Screenshot pendapatan bombastis yang tidak masuk akal.</li>
-                    <li><i class="fas fa-times" style="color: var(--danger); margin-right: 8px;"></i> Teori ribet tanpa praktik nyata.</li>
-                </ul>
-                <div style="border-top: 1px solid #334155; margin-top: 15px; padding-top: 15px;">
-                    <p style="font-size: 0.8rem; font-style: italic; color: #94a3b8;">Buku ini hanya untuk yang siap praktek dan berproses.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing" class="section bg-dark" style="padding-top: 40px;">
-        <div class="container">
-            <div style="max-width: 500px; margin: 0 auto 30px; background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; padding: 20px; border-radius: 12px;">
-                <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px; letter-spacing: 1px;">APA YANG KAMU DAPAT:</h4>
-                <ul style="list-style: none; color: #e2e8f0; font-size: 0.9rem;">
-                    <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 8px;"></i> Ebook PDF</li>
-                    <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 8px;"></i> Step-by-step</li>
-                    <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 8px;"></i> Cocok pemula</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--success); margin-right: 8px;"></i> Bisa dipelajari kapan saja</li>
+            <div class="card-dark" style="padding: 20px; margin-bottom: 30px; text-align: center;">
+                <h4 class="text-primary" style="margin-bottom: 10px;">APA YANG KAMU DAPAT:</h4>
+                <ul style="font-size: 0.9rem; color: #cbd5e1; display: inline-block; text-align: left;">
+                    <li><i class="fas fa-check text-green"></i> Ebook PDF</li>
+                    <li><i class="fas fa-check text-green"></i> Step-by-step</li>
+                    <li><i class="fas fa-check text-green"></i> Cocok pemula</li>
+                    <li><i class="fas fa-check text-green"></i> Bisa dipelajari kapan saja</li>
                 </ul>
             </div>
 
-            <div class="text-center">
-                <h2 style="color: white; font-size: 2rem;">Investasi Leher ke Atas</h2>
-                <p style="color: #94a3b8;">Lebih murah dari sekali makan di restoran, tapi ilmunya bisa dipakai cari uang seumur hidup.</p>
-            </div>
-
-            <div class="pricing-box">
-                <div class="promo-badge">PROMO</div>
-                <div class="price-display">
-                    <p class="strike">Harga Normal: Rp 200.000</p>
-                    <div class="big-price">
-                        <span style="font-size: 1.5rem; vertical-align: top;">Rp</span>69<span style="font-size: 1.5rem; vertical-align: bottom;">rb</span>
-                    </div>
-                    <div class="save-badge">Hemat 65% Hari Ini</div>
+            <div class="pricing-card">
+                <div style="background: var(--red); color: white; display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px;">PROMO</div>
+                <p class="price-old">Harga Normal: Rp 200.000</p>
+                <div class="price-tag">
+                    <span style="font-size: 1.5rem;">Rp</span>69<span style="font-size: 1.5rem;">rb</span>
                 </div>
+                <div style="background: #fef9c3; color: #854d0e; display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin: 10px 0 20px;">Hemat 65% Hari Ini</div>
 
-                <div style="background: #f1f5f9; border: 1px solid rgba(197, 160, 89, 0.3); padding: 15px; border-radius: 8px; display: flex; gap: 10px; margin-bottom: 20px;">
-                    <i class="fas fa-shield-alt" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; text-align: left;">
+                    <i class="fas fa-shield-alt text-primary" style="font-size: 1.5rem;"></i>
                     <div>
-                        <strong style="color: var(--dark); font-size: 0.9rem;">Garansi 100% Puas</strong>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">Jika isi buku ini tidak memberikan insight baru tentang aset digital, hubungi kami.</p>
+                        <div class="bold" style="font-size: 0.9rem;">Garansi 100% Puas</div>
+                        <div style="font-size: 0.75rem; color: #64748b;">Memberikan insight baru tentang aset digital.</div>
                     </div>
                 </div>
 
@@ -700,15 +446,8 @@
                     PELAJARI CARANYA
                 </a>
 
-                <div style="text-align: center; margin-top: 15px; font-size: 0.7rem; color: #64748b;">
-                    <span style="margin: 0 10px;"><i class="fas fa-check" style="color: var(--success);"></i> File Digital</span>
-                    <span style="margin: 0 10px;"><i class="fas fa-check" style="color: var(--success);"></i> Akses Instan</span>
-                    <br>
-                    <p style="margin-top: 5px;">Tidak cocok? Tidak perlu lanjutkan.</p>
-                </div>
-                <div style="text-align: center; border-top: 1px solid #e2e8f0; margin-top: 15px; padding-top: 10px; font-size: 0.65rem; color: #94a3b8;">
-                    <span style="margin: 0 5px;"><i class="fas fa-lock" style="color: var(--success);"></i> Pembayaran Aman</span>
-                    <span style="margin: 0 5px;"><i class="fab fa-whatsapp" style="color: var(--success);"></i> Support WA</span>
+                <div style="font-size: 0.75rem; color: #64748b; margin-top: 15px;">
+                    <i class="fas fa-check text-green"></i> File Digital &nbsp; <i class="fas fa-check text-green"></i> Akses Instan
                 </div>
             </div>
         </div>
@@ -716,30 +455,29 @@
 
     <!-- FOOTER -->
     <footer>
-        <p style="color: var(--primary); font-weight: bold; letter-spacing: 1px; margin-bottom: 15px;">GAJIAN DARI KAMERA HP</p>
-        <div style="margin-bottom: 20px;">
-            <a href="#" style="color: #64748b; margin: 0 10px;">Disclaimer</a>
-            <a href="#" style="color: #64748b; margin: 0 10px;">Privacy Policy</a>
-            <a href="#" style="color: #64748b; margin: 0 10px;">Contact</a>
+        <div class="container">
+            <p class="text-primary bold" style="margin-bottom: 10px;">GAJIAN DARI KAMERA HP</p>
+            <p style="margin-bottom: 20px;">
+                <a href="#">Disclaimer</a> &bull; <a href="#">Privacy</a> &bull; <a href="#">Contact</a>
+            </p>
+            <p style="opacity: 0.7;">Disclaimer: Hasil setiap orang berbeda. Ini panduan skill, bukan skema cepat kaya.</p>
+            <p style="margin-top: 20px;">&copy; 2026 All Rights Reserved.</p>
         </div>
-        <p style="max-width: 500px; margin: 0 auto; opacity: 0.6;">Disclaimer: Hasil setiap orang berbeda tergantung usaha & konsistensi. Ini bukan skema cepat kaya, melainkan panduan membangun skill aset digital.</p>
-        <p style="margin-top: 20px;">&copy; 2026 All Rights Reserved.</p>
     </footer>
 
-    <!-- MOBILE STICKY CTA -->
+    <!-- MOBILE CTA (Hanya muncul di HP) -->
     <div class="mobile-cta">
-        <div class="mobile-price">
-            <div class="old">Rp 200.000</div>
-            <div class="new">Rp 69.000</div>
+        <div>
+            <div style="font-size: 0.75rem; text-decoration: line-through; color: #64748b;">Rp 200.000</div>
+            <div class="bold" style="font-size: 1.2rem; line-height: 1;">Rp 69.000</div>
         </div>
-        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="btn mobile-btn">
-            PELAJARI CARANYA
+        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">
+            BELI SEKARANG
         </a>
     </div>
 
-    <!-- SCRIPT (Minimal JS) -->
     <script>
-        // Timer Logic
+        // Simple Timer
         function startTimer(duration, display) {
             var timer = duration, hours, minutes, seconds;
             setInterval(function () {
@@ -754,9 +492,8 @@
             }, 1000);
         }
         window.onload = function () {
-            var timeLimit = 60 * 60 * 2; 
             var display = document.querySelector('#countdown');
-            startTimer(timeLimit, display);
+            if(display) startTimer(7200, display);
         };
     </script>
 </body>
