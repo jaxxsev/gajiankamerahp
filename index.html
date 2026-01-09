@@ -5,14 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gajian dari Kamera HP</title>
 
-  <!-- Font ringan (2 weight) -->
+  <!-- Font Google -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Meta Pixel -->
+  <!-- Meta Pixel (Contoh) -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -22,62 +19,186 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'ISI_PIXEL_ID_KAMU');
-    fbq('track', 'PageView');
+    // fbq('init', 'ISI_PIXEL_ID_KAMU'); // Uncomment jika sudah ada ID
+    // fbq('track', 'PageView');
   </script>
+
+  <!-- CSS LANGSUNG DISINI (Agar pasti terbaca) -->
+  <style>
+    /* --- 1. SETUP & VARIABEL --- */
+    :root {
+      --primary-color: #facc15;   /* Kuning Emas */
+      --primary-hover: #eab308;   /* Kuning Gelap Hover */
+      --bg-dark: #0f172a;         /* Biru Gelap Hero */
+      --bg-light: #ffffff;        /* Putih */
+      --bg-gray: #f3f4f6;         /* Abu-abu Soft */
+      --text-main: #1f2937;       /* Hitam Abu */
+      --text-muted: #4b5563;      /* Abu-abu Teks */
+      --font-stack: 'Plus Jakarta Sans', Arial, sans-serif;
+      --max-width: 1000px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* --- 2. TYPOGRAPHY --- */
+    h1, h2, h3 { font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; color: #111827; margin-bottom: 1.5rem; }
+    p { margin-bottom: 1.5rem; color: var(--text-muted); }
+
+    /* List dengan Centang Hijau */
+    ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+    ul li { position: relative; padding-left: 2rem; margin-bottom: 0.75rem; font-size: 1.05rem; }
+    ul li::before {
+      content: "✔";
+      color: #16a34a;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* --- 3. LAYOUT --- */
+    .section { padding: 60px 20px; max-width: var(--max-width); margin: 0 auto; }
+    .gray { background-color: var(--bg-gray); width: 100%; }
+    .gray > * { max-width: var(--max-width); margin: 0 auto; }
+    
+    /* Agar list di section gray rapi di tengah */
+    .section.gray { display: flex; flex-direction: column; align-items: center; }
+    .section.gray h2 { text-align: center; }
+    .section.gray ul { width: 100%; max-width: 600px; }
+
+    /* --- 4. COMPONENTS --- */
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background-color: var(--primary-color);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(250, 204, 21, 0.4);
+    }
+    .small { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+    /* --- 5. HERO SECTION --- */
+    .hero {
+      background-color: var(--bg-dark);
+      color: white;
+      padding: 80px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      width: 100%;
+    }
+    .hero-text { max-width: 500px; }
+    .hero h1 { color: white; margin-bottom: 1.2rem; }
+    .hero p { color: #cbd5e1; font-size: 1.125rem; margin-bottom: 2rem; }
+    .hero img {
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+      border: 4px solid rgba(255,255,255,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    /* --- 6. PREVIEW GRID --- */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    .grid img { border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+
+    /* --- 7. CTA --- */
+    .cta { text-align: center; border-top: 1px solid #e5e7eb; background: #fff; }
+    .cta strong { font-size: 1.5rem; color: #111827; display: block; margin-top: 5px;}
+    .cta del { color: #ef4444; opacity: 0.7; }
+
+    /* --- 8. RESPONSIVE MOBILE --- */
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; text-align: center; padding: 50px 20px; }
+      .hero h1 { font-size: 2rem; }
+      .hero-text { margin-bottom: 30px; }
+      .btn { width: 100%; }
+      .grid { grid-template-columns: 1fr; /* Gambar jadi 1 kolom di HP */ }
+      h2 { font-size: 1.75rem; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-text">
     <h1>Gajian dari Kamera HP</h1>
     <p>
-      Satu foto bisa dijual berkali-kali.<br>
-      Tanpa kamera mahal. Tanpa pengalaman.<br>
-      Bisa dari HP yang kamu pakai sekarang.
+      Satu foto bisa dijual berkali-kali. Tanpa kamera mahal. Tanpa pengalaman. Bisa dari HP yang kamu pakai sekarang.
     </p>
     <a href="#checkout" class="btn">Lihat Caranya</a>
   </div>
 
+  <!-- SAYA MENGGUNAKAN GAMBAR PLACEHOLDER DARI INTERNET SUPAYA BISA LANGSUNG MUNCUL -->
+  <!-- Nanti Anda bisa ganti src="https://..." dengan src="nama-gambar-anda.jpg" -->
   <img
-    src="images/hero.webp"
+    src="https://placehold.co/420x550/1e293b/ffffff?text=Cover+Ebook+Disini"
     alt="Ebook Gajian dari Kamera HP"
     width="420"
-    height="420"
-    fetchpriority="high"
+    height="550"
   >
 </section>
 
 <!-- PROBLEM -->
 <section class="section">
-  <h2>Kenapa Banyak Orang Punya HP Bagus Tapi Nggak Nambah Penghasilan?</h2>
-  <ul>
-    <li>HP kameranya sudah bagus</li>
-    <li>Waktu ada, tapi bingung mulai dari mana</li>
-    <li>Nggak tahu foto seperti apa yang laku</li>
-  </ul>
-  <p><strong>Masalahnya bukan di alat, tapi di arah.</strong></p>
+  <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+    <h2>Kenapa Banyak Orang Punya HP Bagus Tapi Nggak Nambah Penghasilan?</h2>
+    <p style="text-align: left; margin-top: 20px;">
+      Banyak yang mengira jualan foto itu harus fotografer profesional. Padahal:
+    </p>
+    <ul style="text-align: left; display: inline-block;">
+      <li>HP kameranya sudah bagus tapi cuma buat sosmed</li>
+      <li>Waktu luang ada, tapi bingung mulai dari mana</li>
+      <li>Nggak tahu foto "biasa" seperti apa yang dicari pembeli</li>
+    </ul>
+    <p style="margin-top: 20px;"><strong>Masalahnya bukan di alat, tapi di ilmunya.</strong></p>
+  </div>
 </section>
 
 <!-- SOLUSI -->
 <section class="section gray">
   <h2>Ebook Ini Dibuat Untuk Pemula</h2>
   <ul>
-    <li>Jenis foto yang benar-benar laku dijual</li>
+    <li>Jenis foto sederhana yang benar-benar laku dijual</li>
     <li>Cara motret pakai HP supaya diterima platform</li>
     <li>Tempat menjual foto agar bisa dibeli berkali-kali</li>
-    <li>Kesalahan pemula yang bikin foto ditolak</li>
+    <li>Kesalahan fatal pemula yang bikin foto ditolak</li>
   </ul>
 </section>
 
 <!-- PREVIEW -->
-<section class="section">
+<section class="section" style="text-align: center;">
   <h2>Preview Isi Ebook</h2>
   <div class="grid">
-    <img src="images/preview1.webp" loading="lazy" decoding="async">
-    <img src="images/preview2.webp" loading="lazy" decoding="async">
+    <!-- Placeholder Gambar Preview -->
+    <img src="https://placehold.co/600x400/e2e8f0/475569?text=Halaman+Isi+1" alt="Preview 1">
+    <img src="https://placehold.co/600x400/e2e8f0/475569?text=Halaman+Isi+2" alt="Preview 2">
   </div>
 </section>
 
@@ -85,22 +206,26 @@
 <section class="section gray">
   <h2>Cocok Untuk Kamu Jika:</h2>
   <ul>
-    <li>Punya HP dengan kamera layak</li>
-    <li>Mau penghasilan tambahan</li>
-    <li>Nggak mau ribet alat mahal</li>
-    <li>Suka panduan praktis & masuk akal</li>
+    <li>Punya HP dengan kamera yang layak</li>
+    <li>Ingin penghasilan tambahan (Passive Income)</li>
+    <li>Nggak mau ribet beli kamera mahal</li>
+    <li>Suka panduan yang to-the-point</li>
   </ul>
 </section>
 
-<!-- CTA -->
+<!-- CTA / CHECKOUT -->
 <section id="checkout" class="section cta">
-  <h2>Mulai dari HP Kamu</h2>
+  <h2>Mulai Hasilkan dari HP Kamu</h2>
   <p>
-    Harga normal <del>Rp129.000</del><br>
+    Investasi ilmu sekali, manfaat berkali-kali.<br>
+    Harga normal <del>Rp129.000</del>
     <strong>Hari ini Rp69.000</strong>
   </p>
-  <a href="ISI_LINK_CHECKOUT" class="btn">Beli Sekarang</a>
-  <p class="small">Akses langsung setelah pembayaran</p>
+  
+  <!-- GANTI LINK INI DENGAN LINK WA ATAU FORM ORDER KAMU -->
+  <a href="#" class="btn">Beli Sekarang</a>
+  
+  <p class="small">Akses langsung dikirim setelah pembayaran</p>
 </section>
 
 </body>
