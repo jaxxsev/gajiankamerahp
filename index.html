@@ -7,54 +7,73 @@
     <meta name="description" content="Satu Foto Bisa Dijual Berkali-kali (Ini Caranya)">
     <meta name="theme-color" content="#0F172A">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Preconnect ke Google Fonts & CDN untuk mempercepat koneksi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts dengan display swap untuk menghindari invisible text -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- FontAwesome Optimized (Non-blocking loading) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    </noscript>
+
+    <!-- Konfigurasi Tailwind (Diproses segera) -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            gold: '#C5A059',
-                            goldLight: '#E5C585',
-                            dark: '#0F172A',
-                            darker: '#020617',
-                            surface: '#F8FAFC',
-                            accent: '#0EA5E9',
-                            danger: '#EF4444',
+        tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        },
+                        colors: {
+                            brand: {
+                                gold: '#C5A059',
+                                goldLight: '#E5C585',
+                                dark: '#0F172A',
+                                darker: '#020617',
+                                surface: '#F8FAFC',
+                                accent: '#0EA5E9',
+                                danger: '#EF4444',
+                            }
+                        },
+                        animation: {
+                            'float': 'float 6s ease-in-out infinite',
+                            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        },
+                        keyframes: {
+                            float: {
+                                '0%, 100%': { transform: 'translateY(0)' },
+                                '50%': { transform: 'translateY(-15px)' },
+                            }
+                        },
+                        boxShadow: {
+                            'glow': '0 0 30px rgba(197, 160, 89, 0.3)',
+                            'card': '0 10px 40px -10px rgba(0,0,0,0.1)',
                         }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        }
-                    },
-                    boxShadow: {
-                        'glow': '0 0 30px rgba(197, 160, 89, 0.3)',
-                        'card': '0 10px 40px -10px rgba(0,0,0,0.1)',
                     }
                 }
             }
         }
     </script>
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
+        /* Critical CSS untuk LCP */
+        body { overflow-x: hidden; }
         .text-gradient {
             background: linear-gradient(to right, #C5A059, #FCD34D, #C5A059);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shine 5s linear infinite;
+            display: inline-block; /* Fix untuk render engine tertentu */
         }
         @keyframes shine {
             to { background-position: 200% center; }
@@ -66,6 +85,12 @@
                 radial-gradient(#1e293b 1px, transparent 1px);
             background-size: 100% 100%, 30px 30px;
         }
+        /* Optimasi CSS Buku 3D */
+        .book-container {
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+        }
         .book-3d {
             position: relative;
             width: 200px;
@@ -73,6 +98,7 @@
             transform-style: preserve-3d;
             transform: rotateY(-30deg) rotateX(10deg);
             transition: transform 0.5s;
+            will-change: transform; /* Optimasi render browser */
         }
         .book-3d:hover {
             transform: rotateY(-20deg) rotateX(5deg) scale(1.05);
@@ -93,6 +119,7 @@
             padding: 0;
             overflow: hidden;
             text-align: center;
+            backface-visibility: hidden; /* Mencegah flickering */
         }
         .book-spine {
             position: absolute;
@@ -115,6 +142,13 @@
             z-index: 0;
             background-image: repeating-linear-gradient(to right, #ccc 0px, #ccc 1px, #fff 1px, #fff 3px);
         }
+        
+        /* Media Query untuk Mobile agar buku tidak terlalu besar */
+        @media (max-width: 640px) {
+            .book-3d {
+                transform: rotateY(-30deg) rotateX(10deg) scale(0.85);
+            }
+        }
     </style>
 
     <!-- Meta Pixel Code -->
@@ -132,11 +166,11 @@
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1420941069372944&ev=PageView&noscript=1"
-    /></noscript>
+    alt=""/></noscript>
     <!-- End Meta Pixel Code -->
 
 </head>
-<body class="bg-brand-surface text-slate-800 antialiased pb-24 md:pb-0 font-sans">
+<body class="bg-brand-surface text-slate-800 antialiased pb-24 md:pb-0 font-sans overflow-x-hidden">
 
     <div class="bg-red-700 text-white text-center py-2 px-4 sticky top-0 z-50 shadow-md">
         <div class="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-2 text-xs md:text-sm font-bold">
@@ -151,7 +185,7 @@
         </p>
     </div>
 
-    <header class="relative bg-tech-pattern overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <header class="relative bg-tech-pattern overflow-hidden pt-10 pb-16 lg:pt-20 lg:pb-28">
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
             <div class="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
                 <div class="w-full lg:w-3/5 text-center lg:text-left">
@@ -162,24 +196,24 @@
                         </p>
                     </div>
 
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-4">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight md:leading-[1.1] mb-4">
                         GAJIAN DARI <br>
                         <span class="text-gradient">KAMERA HP</span>
                     </h1>
 
-                    <p class="text-brand-goldLight font-bold text-sm md:text-base uppercase tracking-widest mb-6">
+                    <p class="text-brand-goldLight font-bold text-xs sm:text-sm md:text-base uppercase tracking-widest mb-6">
                         Tanpa kamera mahal • Tanpa pengalaman • Bisa dipelajari pemula
                     </p>
                     
-                    <h2 class="text-xl md:text-2xl text-slate-300 font-medium mb-8">
+                    <h2 class="text-lg md:text-2xl text-slate-300 font-medium mb-8">
                         Satu Foto HP Bisa Dijual Berkali-kali. 
-                        <span class="block mt-2 text-base md:text-lg text-slate-400 font-normal italic">
+                        <span class="block mt-2 text-sm md:text-lg text-slate-400 font-normal italic">
                             Tanpa Latar Belakang Fotografi Profesional.
                         </span>
                     </h2>
 
                     <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
-                        <a href="#pricing" class="inline-flex justify-center items-center gap-3 bg-brand-gold hover:bg-white hover:text-brand-dark text-slate-900 text-xl font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(197,160,89,0.5)] transition-all duration-300 transform hover:-translate-y-1">
+                        <a href="#pricing" class="inline-flex justify-center items-center gap-3 bg-brand-gold hover:bg-white hover:text-brand-dark text-slate-900 text-lg md:text-xl font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(197,160,89,0.5)] transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
                             <span>Ambil Ebooknya Sekarang</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -189,10 +223,11 @@
                     </p>
                 </div>
 
-                <div class="w-full lg:w-2/5 flex justify-center items-center py-10">
+                <div class="w-full lg:w-2/5 flex justify-center items-center py-6 md:py-10 book-container">
                     <div class="book-3d animate-float">
                         <div class="book-cover">
-                            <img src="image/cover.png" alt="Cover Ebook Gajian Dari Kamera HP" class="w-full h-full object-cover">
+                            <!-- LCP Optimization: fetchpriority high, explicit size -->
+                            <img src="image/cover.png" width="200" height="300" alt="Cover Ebook Gajian Dari Kamera HP" class="w-full h-full object-cover" fetchpriority="high">
                         </div>
                         <div class="book-spine"></div>
                         <div class="book-pages"></div>
@@ -202,11 +237,11 @@
         </div>
     </header>
 
-    <section class="py-16 bg-white">
+    <section class="py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4 max-w-4xl">
             <h3 class="text-center text-red-600 font-bold tracking-widest uppercase text-sm mb-2">WARNING</h3>
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-10 leading-tight">
-                3 Kesalahan Fatal Mengapa Foto Anda <br>Hanya Jadi "Sampah Memori"
+            <h2 class="text-2xl md:text-4xl font-bold text-slate-900 text-center mb-10 leading-tight">
+                3 Kesalahan Fatal Mengapa Foto Anda <br class="hidden md:block">Hanya Jadi "Sampah Memori"
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -229,11 +264,11 @@
         </div>
     </section>
 
-    <section class="py-16 bg-brand-surface border-y border-slate-200">
+    <section class="py-12 md:py-16 bg-brand-surface border-y border-slate-200">
         <div class="container mx-auto px-4 max-w-4xl">
             <div class="text-center mb-10">
                 <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">PROSES SIMPLE</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Cara Kerjanya Sederhana:</h2>
+                <h2 class="text-2xl md:text-4xl font-bold text-slate-900 mt-2">Cara Kerjanya Sederhana:</h2>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -276,14 +311,14 @@
         </div>
     </section>
 
-    <section class="py-16 bg-brand-dark text-white relative overflow-hidden">
+    <section class="py-12 md:py-16 bg-brand-dark text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl"></div>
 
         <div class="container mx-auto px-4 max-w-5xl relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-10">
                 <div class="w-full md:w-1/2">
                     <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">REALITAS PASAR 2026</span>
-                    <h2 class="text-3xl font-bold mt-2 mb-6">Kenapa Harus Mulai SEKARANG?</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-6">Kenapa Harus Mulai SEKARANG?</h2>
                     <div class="space-y-4">
                         <div class="flex items-start gap-4">
                             <div class="w-8 h-8 rounded bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-1"><i class="fas fa-robot"></i></div>
@@ -318,15 +353,16 @@
         </div>
     </section>
 
-    <section class="py-16 bg-brand-surface">
+    <section class="py-12 md:py-16 bg-brand-surface">
         <div class="container mx-auto px-4 max-w-4xl">
             <h2 class="text-2xl md:text-3xl font-bold text-center text-slate-900 mb-8">
                 "Emang Laku Foto Beginian?"
             </h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <!-- Optimization: Loading lazy, decoding async, and width/height placeholder attributes -->
                 <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image1.jpg" alt="Foto Kabel Ruwet" class="w-full h-full object-cover">
+                    <img src="image/image1.jpg" alt="Foto Kabel Ruwet" class="w-full h-full object-cover" loading="lazy" decoding="async" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Foto Kabel Ruwet</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: IT</div>
@@ -334,7 +370,7 @@
                 </div>
                 
                 <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image2.jpg" alt="Video Asap Kopi" class="w-full h-full object-cover">
+                    <img src="image/image2.jpg" alt="Video Asap Kopi" class="w-full h-full object-cover" loading="lazy" decoding="async" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Asap Kopi (Video)</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Morning</div>
@@ -342,7 +378,7 @@
                 </div>
                 
                  <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image3.jpg" alt="Tekstur Aspal" class="w-full h-full object-cover">
+                    <img src="image/image3.jpg" alt="Tekstur Aspal" class="w-full h-full object-cover" loading="lazy" decoding="async" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Tekstur Aspal</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Industry</div>
@@ -350,7 +386,7 @@
                 </div>
                 
                  <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image4.jpg" alt="Cuci Tangan" class="w-full h-full object-cover">
+                    <img src="image/image4.jpg" alt="Cuci Tangan" class="w-full h-full object-cover" loading="lazy" decoding="async" width="200" height="200">
                     <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
                         <p class="text-xs font-bold text-slate-700">Cuci Tangan</p>
                         <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Hygiene</div>
@@ -370,7 +406,7 @@
         </div>
     </section>
 
-    <section class="py-16 bg-white border-y border-slate-100">
+    <section class="py-12 md:py-16 bg-white border-y border-slate-100">
         <div class="container mx-auto px-4 max-w-4xl">
             <h2 class="text-2xl font-bold text-center mb-10">Apa Yang Berubah Setelah Baca Buku Ini?</h2>
             
@@ -413,15 +449,15 @@
         </div>
     </section>
 
-    <section class="py-16 bg-brand-surface">
+    <section class="py-12 md:py-16 bg-brand-surface">
         <div class="container mx-auto px-4 max-w-3xl text-center">
             <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">SIAPA DIBALIK BUKU INI?</h3>
-            <p class="text-xl md:text-2xl font-serif italic text-slate-800 mb-6 leading-relaxed">
+            <p class="text-lg md:text-2xl font-serif italic text-slate-800 mb-6 leading-relaxed">
                 "Dulu saya pikir fotografi itu mahal. Sampai saya sadar, foto tembok retak di belakang rumah saya laku $15. <strong>Dan itu bukan satu-satunya.</strong>"
             </p>
             <div class="flex items-center justify-center gap-4">
                 <div class="w-16 h-16 bg-slate-300 rounded-full overflow-hidden border-2 border-slate-200">
-                    <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" class="w-full h-full object-cover">
+                    <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" class="w-full h-full object-cover" loading="lazy" width="64" height="64">
                 </div>
                 <div class="text-left">
                     <p class="font-bold text-slate-900">Tim Gajian Dari Kamera</p>
@@ -457,7 +493,6 @@
         </div>
     </section>
 
-    <!-- FIXED FAQ SECTION: Replaced custom bg class with standard slate-50 and added border for visibility -->
     <section class="py-12 bg-slate-50 border-t border-slate-200">
         <div class="container mx-auto px-4 max-w-3xl">
             <h3 class="text-center font-bold text-slate-900 mb-8 text-lg">Yang Sering Ditanyakan (FAQ)</h3>
@@ -603,7 +638,8 @@
         </div>
     </div>
 
-    <script>
+    <!-- Script diletakkan di bawah untuk non-blocking rendering -->
+    <script defer>
         function startTimer(duration, display) {
             var timer = duration, hours, minutes, seconds;
             setInterval(function () {
@@ -620,18 +656,21 @@
         window.onload = function () {
             var timeLimit = 60 * 60 * 2; 
             var display = document.querySelector('#countdown');
-            startTimer(timeLimit, display);
-        };
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            if(display) startTimer(timeLimit, display);
+            
+            // Smooth Scroll Optimization
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var target = document.querySelector(this.getAttribute('href'));
+                    if(target){
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
-        });
+        };
     </script>
 </body>
 </html>
-
-
