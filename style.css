@@ -1,52 +1,129 @@
+/* --- 1. SETUP VARIABEL & RESET --- */
+:root {
+  --primary-color: #facc15;   /* Kuning Emas */
+  --primary-hover: #eab308;   /* Kuning Gelap untuk Hover */
+  --bg-dark: #0f172a;         /* Biru Gelap (Hero) */
+  --text-main: #111827;       /* Hitam Abu (Teks Utama) */
+  --text-muted: #4b5563;      /* Abu-abu (Teks Pendukung) */
+  --bg-light: #f9fafb;        /* Background Halaman */
+  --font-stack: 'Plus Jakarta Sans', Arial, sans-serif; /* Font Modern */
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f9fafb;
-  color: #111827;
+  font-family: var(--font-stack);
+  background: var(--bg-light);
+  color: var(--text-main);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Membuat teks lebih tajam di Mac/iOS */
 }
 
+/* --- 2. TYPOGRAPHY --- */
 h1, h2, h3 {
   margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  font-weight: 800;
 }
 
-.hero {
-  background: #0f172a;
-  color: #ffffff;
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 32px;
-}
-
-.hero p {
-  max-width: 600px;
-  margin: 10px auto;
-}
-
-.section {
-  max-width: 800px;
-  margin: auto;
-  padding: 40px 20px;
+p {
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
 }
 
 ul {
   padding-left: 20px;
+  margin-bottom: 1.5rem;
 }
 
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* --- 3. HERO SECTION --- */
+.hero {
+  background: var(--bg-dark);
+  color: #ffffff;
+  padding: 80px 20px; /* Padding lebih besar agar lega */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: 2.5rem; /* Menggunakan REM agar skalabel */
+  margin-bottom: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero p {
+  font-size: 1.125rem;
+  color: #94a3b8; /* Warna abu terang khusus dark background */
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+/* --- 4. CONTENT SECTIONS --- */
+.section {
+  max-width: 800px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+/* --- 5. BUTTON STYLING --- */
 .button {
   display: inline-block;
-  margin-top: 20px;
-  padding: 14px 26px;
-  background: #facc15;
-  color: #000;
-  font-weight: bold;
+  padding: 16px 32px;
+  background: var(--primary-color);
+  color: #000000;
+  font-weight: 700;
+  font-size: 1rem;
   text-decoration: none;
   border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Animasi halus */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Efek saat mouse diarahkan ke tombol */
+.button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px); /* Tombol naik sedikit */
+  box-shadow: 0 10px 15px -3px rgba(250, 204, 21, 0.3); /* Efek glow */
+}
+
+/* Efek saat tombol ditekan */
+.button:active {
+  transform: translateY(0);
+}
+
+/* --- 6. RESPONSIVE (MOBILE) --- */
+@media (max-width: 768px) {
+  .hero {
+    padding: 50px 20px;
+  }
+
+  .hero h1 {
+    font-size: 1.875rem; /* Font lebih kecil di HP */
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 40px 20px;
+  }
+
+  .button {
+    width: 100%; /* Tombol memenuhi lebar layar di HP */
+    text-align: center;
+  }
 }
