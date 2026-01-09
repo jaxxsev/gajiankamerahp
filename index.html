@@ -6,653 +6,631 @@
     <title>Gajian Dari Kamera HP - Ubah Galeri Jadi Aset</title>
     <meta name="description" content="Satu Foto Bisa Dijual Berkali-kali (Ini Caranya)">
     <meta name="theme-color" content="#0F172A">
+code
+Code
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- 1. PRECONNECT: Mempercepat koneksi ke server Font & CDN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
-
-    <!-- 2. FONT: Display Swap agar teks muncul duluan sebelum font selesai download -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- 3. FONTAWESOME: Teknik loading non-blocking agar tidak menghambat rendering -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-    <!-- TAILWIND CONFIG: Disetel sebelum script diload agar tidak error -->
-    <script>
-        tailwind = {
-            config: {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        },
-                        colors: {
-                            brand: {
-                                gold: '#C5A059',
-                                goldLight: '#E5C585',
-                                dark: '#0F172A',
-                                darker: '#020617',
-                                surface: '#F8FAFC',
-                                accent: '#0EA5E9',
-                                danger: '#EF4444',
-                            }
-                        },
-                        animation: {
-                            'float': 'float 6s ease-in-out infinite',
-                            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        },
-                        keyframes: {
-                            float: {
-                                '0%, 100%': { transform: 'translateY(0)' },
-                                '50%': { transform: 'translateY(-15px)' },
-                            }
-                        },
-                        boxShadow: {
-                            'glow': '0 0 30px rgba(197, 160, 89, 0.3)',
-                            'card': '0 10px 40px -10px rgba(0,0,0,0.1)',
-                        }
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                },
+                colors: {
+                    brand: {
+                        gold: '#C5A059',
+                        goldLight: '#E5C585',
+                        dark: '#0F172A',
+                        darker: '#020617',
+                        surface: '#F8FAFC',
+                        accent: '#0EA5E9',
+                        danger: '#EF4444',
                     }
+                },
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                    'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-15px)' },
+                    }
+                },
+                boxShadow: {
+                    'glow': '0 0 30px rgba(197, 160, 89, 0.3)',
+                    'card': '0 10px 40px -10px rgba(0,0,0,0.1)',
                 }
             }
         }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    }
+</script>
 
-    <style>
-        /* CSS Asli Dipertahankan */
-        .text-gradient {
-            background: linear-gradient(to right, #C5A059, #FCD34D, #C5A059);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 5s linear infinite;
-        }
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-        .bg-tech-pattern {
-            background-color: #0F172A;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(197, 160, 89, 0.15) 0px, transparent 50%),
-                radial-gradient(#1e293b 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px;
-        }
-        .book-3d {
-            position: relative;
-            width: 200px;
-            height: 300px;
-            transform-style: preserve-3d;
-            transform: rotateY(-30deg) rotateX(10deg);
-            transition: transform 0.5s;
-        }
-        /* Mobile adjustment agar buku tidak menabrak/terpotong */
-        @media (max-width: 768px) {
-            .book-3d {
-                transform: rotateY(-30deg) rotateX(10deg) scale(0.9);
-            }
-        }
-        .book-3d:hover {
-            transform: rotateY(-20deg) rotateX(5deg) scale(1.05);
-        }
-        .book-cover {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #0f172a; 
-            border-radius: 4px 12px 12px 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #C5A059;
-            box-shadow: inset 5px 0 10px rgba(0,0,0,0.5);
-            z-index: 2;
-            padding: 0;
-            overflow: hidden;
-            text-align: center;
-        }
-        .book-spine {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 30px;
-            height: 100%;
-            background: #C5A059;
-            transform: rotateY(-90deg) translateZ(-15px);
-            z-index: 1;
-        }
-        .book-pages {
-            position: absolute;
-            right: 0;
-            top: 2%;
-            width: 28px;
-            height: 96%;
-            background: #fff;
-            transform: rotateY(90deg) translateZ(-14px);
-            z-index: 0;
-            background-image: repeating-linear-gradient(to right, #ccc 0px, #ccc 1px, #fff 1px, #fff 3px);
-        }
-    </style>
+<style>
+    .text-gradient {
+        background: linear-gradient(to right, #C5A059, #FCD34D, #C5A059);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 5s linear infinite;
+    }
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+    .bg-tech-pattern {
+        background-color: #0F172A;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(197, 160, 89, 0.15) 0px, transparent 50%),
+            radial-gradient(#1e293b 1px, transparent 1px);
+        background-size: 100% 100%, 30px 30px;
+    }
+    .book-3d {
+        position: relative;
+        width: 200px;
+        height: 300px;
+        transform-style: preserve-3d;
+        transform: rotateY(-30deg) rotateX(10deg);
+        transition: transform 0.5s;
+    }
+    .book-3d:hover {
+        transform: rotateY(-20deg) rotateX(5deg) scale(1.05);
+    }
+    .book-cover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #0f172a; 
+        border-radius: 4px 12px 12px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #C5A059;
+        box-shadow: inset 5px 0 10px rgba(0,0,0,0.5);
+        z-index: 2;
+        padding: 0;
+        overflow: hidden;
+        text-align: center;
+    }
+    .book-spine {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 100%;
+        background: #C5A059;
+        transform: rotateY(-90deg) translateZ(-15px);
+        z-index: 1;
+    }
+    .book-pages {
+        position: absolute;
+        right: 0;
+        top: 2%;
+        width: 28px;
+        height: 96%;
+        background: #fff;
+        transform: rotateY(90deg) translateZ(-14px);
+        z-index: 0;
+        background-image: repeating-linear-gradient(to right, #ccc 0px, #ccc 1px, #fff 1px, #fff 3px);
+    }
+</style>
 
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1420941069372944');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1420941069372944&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1420941069372944');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1420941069372944&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
-<body class="bg-brand-surface text-slate-800 antialiased pb-24 md:pb-0 font-sans overflow-x-hidden">
-
-    <div class="bg-red-700 text-white text-center py-2 px-4 sticky top-0 z-50 shadow-md">
-        <div class="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-2 text-xs md:text-sm font-bold">
-            <div class="flex items-center gap-2">
-                <span><i class="fas fa-hourglass-half animate-pulse"></i></span>
-                <span>Waktu Fokus Anda Hari Ini:</span>
-                <span id="countdown" class="bg-red-900 px-2 rounded font-mono border border-red-500">02:00:00</span>
-            </div>
+<body class="bg-brand-surface text-slate-800 antialiased pb-24 md:pb-0 font-sans">
+code
+Code
+<div class="bg-red-700 text-white text-center py-2 px-4 sticky top-0 z-50 shadow-md">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-2 text-xs md:text-sm font-bold">
+        <div class="flex items-center gap-2">
+            <span><i class="fas fa-hourglass-half animate-pulse"></i></span>
+            <span>Waktu Fokus Anda Hari Ini:</span>
+            <span id="countdown" class="bg-red-900 px-2 rounded font-mono border border-red-500">02:00:00</span>
         </div>
-        <p class="text-[10px] text-red-200 mt-1 font-normal opacity-80">
-            *Timer ini hanya pengingat fokus, bukan batasan promo.
-        </p>
     </div>
+    <p class="text-[10px] text-red-200 mt-1 font-normal opacity-80">
+        *Timer ini hanya pengingat fokus, bukan batasan promo.
+    </p>
+</div>
 
-    <header class="relative bg-tech-pattern overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-28">
-        <div class="container mx-auto px-4 max-w-6xl relative z-10">
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
-                <div class="w-full lg:w-3/5 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 rounded px-3 py-1 mb-6">
-                        <i class="fas fa-bolt text-brand-gold text-sm animate-pulse"></i>
-                        <p class="text-brand-gold text-xs font-bold uppercase tracking-wider">
-                            Untuk Pengguna Android & iPhone
-                        </p>
-                    </div>
-
-                    <!-- Optimized Responsive Typography -->
-                    <h1 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight md:leading-[1.1] mb-4">
-                        GAJIAN DARI <br>
-                        <span class="text-gradient">KAMERA HP</span>
-                    </h1>
-
-                    <p class="text-brand-goldLight font-bold text-sm md:text-base uppercase tracking-widest mb-6">
-                        Tanpa kamera mahal • Tanpa pengalaman • Bisa dipelajari pemula
-                    </p>
-                    
-                    <h2 class="text-lg md:text-2xl text-slate-300 font-medium mb-8">
-                        Satu Foto HP Bisa Dijual Berkali-kali. 
-                        <span class="block mt-2 text-base md:text-lg text-slate-400 font-normal italic">
-                            Tanpa Latar Belakang Fotografi Profesional.
-                        </span>
-                    </h2>
-
-                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
-                        <a href="#pricing" class="inline-flex justify-center items-center gap-3 bg-brand-gold hover:bg-white hover:text-brand-dark text-slate-900 text-lg md:text-xl font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(197,160,89,0.5)] transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
-                            <span>Ambil Ebooknya Sekarang</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    <p class="text-slate-500 text-sm">
-                        <i class="fas fa-lock text-brand-gold mr-1"></i> 100% Downloadable PDF. Akses Selamanya.
+<header class="relative bg-tech-pattern overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-16">
+            <div class="w-full lg:w-3/5 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 rounded px-3 py-1 mb-6">
+                    <i class="fas fa-bolt text-brand-gold text-sm animate-pulse"></i>
+                    <p class="text-brand-gold text-xs font-bold uppercase tracking-wider">
+                        Untuk Pengguna Android & iPhone
                     </p>
                 </div>
 
-                <div class="w-full lg:w-2/5 flex justify-center items-center py-6 md:py-10">
-                    <div class="book-3d animate-float">
-                        <div class="book-cover">
-                            <!-- OPTIMIZATION: width/height & fetchpriority -->
-                            <img src="image/cover.png" alt="Cover Ebook Gajian Dari Kamera HP" class="w-full h-full object-cover" width="200" height="300" fetchpriority="high">
-                        </div>
-                        <div class="book-spine"></div>
-                        <div class="book-pages"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-4">
+                    GAJIAN DARI <br>
+                    <span class="text-gradient">KAMERA HP</span>
+                </h1>
 
-    <section class="py-12 md:py-16 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h3 class="text-center text-red-600 font-bold tracking-widest uppercase text-sm mb-2">WARNING</h3>
-            <h2 class="text-2xl md:text-4xl font-bold text-slate-900 text-center mb-10 leading-tight">
-                3 Kesalahan Fatal Mengapa Foto Anda <br class="hidden md:block">Hanya Jadi "Sampah Memori"
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500 shadow-sm hover:bg-slate-100 transition">
-                    <div class="text-4xl mb-4 text-brand-dark"><i class="fas fa-camera"></i></div>
-                    <h4 class="font-bold text-slate-900 text-lg mb-2">Terjebak Alat</h4>
-                    <p class="text-slate-600 text-sm">Mengira harus punya kamera 20 juta dulu baru bisa mulai. Padahal pasar butuh visual yang otentik, bukan yang "terlalu sempurna".</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500 shadow-sm hover:bg-slate-100 transition">
-                    <div class="text-4xl mb-4 text-brand-dark"><i class="fas fa-thumbs-up"></i></div>
-                    <h4 class="font-bold text-slate-900 text-lg mb-2">Mental Sosmed</h4>
-                    <p class="text-slate-600 text-sm">Sibuk cari Like & Comment di Instagram yang tidak membayar tagihan. Aset digital dibayar Dollar, bukan jempol.</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500 shadow-sm hover:bg-slate-100 transition">
-                    <div class="text-4xl mb-4 text-brand-dark"><i class="fas fa-brain"></i></div>
-                    <h4 class="font-bold text-slate-900 text-lg mb-2">Buta Aset</h4>
-                    <p class="text-slate-600 text-sm">Punya fotonya, tapi tidak tahu cara mengemas dan menawarkannya. Akibatnya foto hanya menumpuk memenuhi memori HP.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 md:py-16 bg-brand-surface border-y border-slate-200">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <div class="text-center mb-10">
-                <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">PROSES SIMPLE</span>
-                <h2 class="text-2xl md:text-4xl font-bold text-slate-900 mt-2">Cara Kerjanya Sederhana:</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">1</div>
-                    <div class="pt-6">
-                        <i class="fas fa-mobile-alt text-4xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-slate-900 mb-2">Ambil Foto Pakai HP</h4>
-                        <p class="text-xs text-slate-600">Gunakan objek di sekitar rumah Anda.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">2</div>
-                    <div class="pt-6">
-                        <i class="fas fa-magic text-4xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-slate-900 mb-2">Edit Ringan</h4>
-                        <p class="text-xs text-slate-600">Tanpa skill rumit, cukup perbaiki cahaya.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">3</div>
-                    <div class="pt-6">
-                        <i class="fas fa-cloud-upload-alt text-4xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-slate-900 mb-2">Upload</h4>
-                        <p class="text-xs text-slate-600">Ke platform khusus yang diajarkan.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">4</div>
-                    <div class="pt-6">
-                        <i class="fas fa-sack-dollar text-4xl text-green-600 mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-slate-900 mb-2">Jadi Aset Digital</h4>
-                        <p class="text-xs text-slate-600">Foto siap menghasilkan pasif income.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 md:py-16 bg-brand-dark text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl"></div>
-
-        <div class="container mx-auto px-4 max-w-5xl relative z-10">
-            <div class="flex flex-col md:flex-row items-center gap-10">
-                <div class="w-full md:w-1/2">
-                    <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">REALITAS PASAR 2026</span>
-                    <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-6">Kenapa Harus Mulai SEKARANG?</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-1"><i class="fas fa-robot"></i></div>
-                            <p class="text-slate-300 text-sm"><strong class="text-white block text-base">Era AI Butuh Stok Nyata</strong>AI memang canggih, tapi terlihat palsu. Industri kreatif makin haus akan foto/video "Human Touch" yang nyata dari kamera HP Anda.</p>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-1"><i class="fas fa-chart-line"></i></div>
-                            <p class="text-slate-300 text-sm"><strong class="text-white block text-base">Momentum Global</strong>Platform aset digital sedang gencar mencari konten dari kreator Asia (unik & eksotis). Jangan sampai momentum ini lewat.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 bg-slate-800 p-8 rounded-2xl border border-slate-700 text-center">
-                    <h3 class="text-xl font-bold mb-4">Pilihan Di Tangan Anda</h3>
-                    <div class="flex justify-between items-center gap-4 text-left mb-6">
-                        <div class="bg-red-500/10 p-4 rounded w-1/2 border border-red-500/20">
-                            <p class="text-xs text-red-400 font-bold uppercase">Opsi A</p>
-                            <p class="text-sm text-slate-300 mt-1">HP cuma buat scroll TikTok & main game.</p>
-                        </div>
-                        <div class="bg-green-500/10 p-4 rounded w-1/2 border border-green-500/20">
-                            <p class="text-xs text-green-400 font-bold uppercase">Opsi B</p>
-                            <p class="text-sm text-slate-300 mt-1">HP jadi "karyawan" yang kerja 24 jam.</p>
-                        </div>
-                    </div>
-                    <a href="#pricing" class="block w-full bg-brand-gold text-brand-dark font-bold py-3 rounded hover:bg-white transition">SAYA PILIH OPSI B</a>
-                </div>
-            </div>
-            <div class="text-center mt-8">
-                <a href="#pricing" class="text-brand-gold hover:text-white underline underline-offset-4 decoration-1 decoration-brand-gold/50 text-sm font-medium transition">
-                    Saya tidak mau ketinggalan momentum ini &rarr;
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 md:py-16 bg-brand-surface">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-center text-slate-900 mb-8">
-                "Emang Laku Foto Beginian?"
-            </h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <!-- OPTIMIZATION: Loading Lazy + Width Height -->
-                <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image1.jpg" alt="Foto Kabel Ruwet" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
-                    <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
-                        <p class="text-xs font-bold text-slate-700">Foto Kabel Ruwet</p>
-                        <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: IT</div>
-                    </div>
-                </div>
-                
-                <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image2.jpg" alt="Video Asap Kopi" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
-                    <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
-                        <p class="text-xs font-bold text-slate-700">Asap Kopi (Video)</p>
-                        <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Morning</div>
-                    </div>
-                </div>
-                
-                 <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image3.jpg" alt="Tekstur Aspal" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
-                    <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
-                        <p class="text-xs font-bold text-slate-700">Tekstur Aspal</p>
-                        <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Industry</div>
-                    </div>
-                </div>
-                
-                 <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
-                    <img src="image/image4.jpg" alt="Cuci Tangan" class="w-full h-full object-cover" loading="lazy" width="200" height="200">
-                    <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
-                        <p class="text-xs font-bold text-slate-700">Cuci Tangan</p>
-                        <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Hygiene</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
-                <p class="text-slate-800 font-medium mb-4">
-                    Objek di atas ada di sekitar Anda, kan? <br>
-                    Di buku ini, saya bongkar <strong>50+ Ide Objek Lainnya</strong> yang ada di rumah Anda.
+                <p class="text-brand-goldLight font-bold text-sm md:text-base uppercase tracking-widest mb-6">
+                    Tanpa kamera mahal • Tanpa pengalaman • Bisa dipelajari pemula
                 </p>
-                <a href="#pricing" class="text-brand-accent font-bold hover:underline decoration-wavy">
-                    Saya Mau Daftar Ide Foto-nya &raquo;
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 md:py-16 bg-white border-y border-slate-100">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-2xl font-bold text-center mb-10">Apa Yang Berubah Setelah Baca Buku Ini?</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-eye"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Mata "Duit"</h4>
-                        <p class="text-sm text-slate-600">Anda tidak lagi melihat "sampah" atau "berantakan". Anda melihat tekstur, konsep, dan potensi uang di setiap sudut rumah.</p>
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-folder-open"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Punya Aset, Bukan File</h4>
-                        <p class="text-sm text-slate-600">Galeri HP Anda bukan lagi tempat memori penuh yang sia-sia, tapi gudang stok dagangan yang siap ditawarkan ke pasar global.</p>
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-video"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Skill Videografi Simpel</h4>
-                        <p class="text-sm text-slate-600">Paham cara rekam video pendek 10 detik yang stabil, tajam, dan dicari editor video, tanpa gimbal mahal.</p>
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-key"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Kata Kunci Rahasia</h4>
-                        <p class="text-sm text-slate-600">Tahu cara menamai file (metadata) agar mudah ditemukan pembeli bule yang siap bayar Dollar.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <a href="#pricing" class="inline-block text-lg font-bold text-brand-dark hover:text-brand-gold border-b-2 border-brand-gold pb-1 transition-all">
-                    Saya Mau Alami Perubahan Ini <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 md:py-16 bg-brand-surface">
-        <div class="container mx-auto px-4 max-w-3xl text-center">
-            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">SIAPA DIBALIK BUKU INI?</h3>
-            <p class="text-xl md:text-2xl font-serif italic text-slate-800 mb-6 leading-relaxed">
-                "Dulu saya pikir fotografi itu mahal. Sampai saya sadar, foto tembok retak di belakang rumah saya laku $15. <strong>Dan itu bukan satu-satunya.</strong>"
-            </p>
-            <div class="flex items-center justify-center gap-4">
-                <div class="w-16 h-16 bg-slate-300 rounded-full overflow-hidden border-2 border-slate-200">
-                    <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" class="w-full h-full object-cover" loading="lazy" width="100" height="100">
-                </div>
-                <div class="text-left">
-                    <p class="font-bold text-slate-900">Tim Gajian Dari Kamera</p>
-                    <p class="text-xs text-slate-500">Praktisi Microstock & Mobile Photographer</p>
-                    <p class="text-[10px] text-slate-500 mt-1 italic opacity-80">
-                        *Beberapa karya penulis sudah terjual di marketplace aset digital internasional.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h3 class="text-center font-bold text-slate-900 mb-8 text-lg">Apa Kata Mereka?</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-brand-surface p-4 rounded-lg shadow-sm border border-slate-100">
-                    <div class="text-brand-gold text-xs mb-2">⭐⭐⭐⭐⭐</div>
-                    <p class="text-xs text-slate-600 italic">"Gak nyangka foto sisa masakan bisa laku. Bukunya to the point."</p>
-                    <p class="text-xs font-bold text-slate-800 mt-2">- Reza, Karyawan</p>
-                </div>
-                <div class="bg-brand-surface p-4 rounded-lg shadow-sm border border-slate-100">
-                    <div class="text-brand-gold text-xs mb-2">⭐⭐⭐⭐⭐</div>
-                    <p class="text-xs text-slate-600 italic">"Bahasa-nya enak, gak pake istilah fotografi ribet. Cocok buat pemula kayak saya."</p>
-                    <p class="text-xs font-bold text-slate-800 mt-2">- Susanto, Wiraswasta</p>
-                </div>
-                <div class="bg-brand-surface p-4 rounded-lg shadow-sm border border-slate-100">
-                    <div class="text-brand-gold text-xs mb-2">⭐⭐⭐⭐⭐</div>
-                    <p class="text-xs text-slate-600 italic">"Baru praktek 3 hari, galeri HP udah mulai rapi jadi aset."</p>
-                    <p class="text-xs font-bold text-slate-800 mt-2">- Yenita, Mahasiswa</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FIXED FAQ SECTION -->
-    <section class="py-12 bg-slate-50 border-t border-slate-200">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h3 class="text-center font-bold text-slate-900 mb-8 text-lg">Yang Sering Ditanyakan (FAQ)</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
-                    <p class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-camera text-brand-gold mr-1"></i> Harus Kamera Bagus?</p>
-                    <p class="text-xs text-slate-600">Tidak. HP 2-3 jutaan sudah sangat cukup asal cahayanya baik.</p>
-                </div>
-                <div class="p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
-                    <p class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-clock text-brand-gold mr-1"></i> Berapa Lama Mulai?</p>
-                    <p class="text-xs text-slate-600">Setelah baca, hari ini juga Anda bisa mulai hunting aset di rumah.</p>
-                </div>
-                <div class="p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
-                    <p class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-user-check text-brand-gold mr-1"></i> Cocok Pemula?</p>
-                    <p class="text-xs text-slate-600">Sangat. Bahasa buku ini dibuat khusus untuk orang awam/gaptek.</p>
-                </div>
-            </div>
-            <p class="text-center text-sm text-slate-500 mt-8">
-                Jika pertanyaan Anda sudah terjawab, silakan lanjutkan di bawah ini:
-            </p>
-            <div class="flex justify-center mt-2">
-                <i class="fas fa-chevron-down text-brand-gold animate-bounce"></i>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-brand-dark pb-10 pt-16">
-        <div class="container mx-auto px-4 max-w-2xl">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 text-center shadow-lg relative overflow-hidden">
-                <div class="absolute -top-4 -right-4 w-16 h-16 bg-red-600/20 rounded-full blur-xl"></div>
-                <h3 class="font-bold text-white mb-4 text-sm uppercase tracking-widest">
-                    Apa Yang <span class="text-red-400 underline decoration-red-500/50">TIDAK</span> Akan Anda Dapatkan
-                </h3>
-                <ul class="text-sm text-slate-300 space-y-2 inline-block text-left list-none">
-                    <li class="flex items-start gap-2"><i class="fas fa-times text-red-500 mt-0.5"></i> Janji kaya cepat dalam semalam (Get Rich Quick).</li>
-                    <li class="flex items-start gap-2"><i class="fas fa-times text-red-500 mt-0.5"></i> Screenshot pendapatan bombastis yang tidak masuk akal.</li>
-                    <li class="flex items-start gap-2"><i class="fas fa-times text-red-500 mt-0.5"></i> Teori ribet tanpa praktik nyata.</li>
-                </ul>
-                <div class="mt-4 pt-4 border-t border-slate-700">
-                    <p class="text-xs text-slate-500 italic">Buku ini hanya untuk yang siap praktek dan berproses.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="pb-20 pt-10 bg-brand-dark relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
-
-        <div class="container mx-auto px-4 max-w-lg relative z-10">
-            <div class="mb-8 p-6 bg-slate-800/50 border border-slate-700 rounded-xl">
-                <h4 class="text-brand-gold font-bold mb-4 text-center tracking-wider uppercase">APA YANG KAMU DAPAT:</h4>
-                <ul class="space-y-3 text-slate-200 text-sm md:text-base">
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check-circle text-green-500"></i> Ebook PDF
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check-circle text-green-500"></i> Step-by-step
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check-circle text-green-500"></i> Cocok pemula
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check-circle text-green-500"></i> Bisa dipelajari kapan saja
-                    </li>
-                </ul>
-            </div>
-
-            <div class="text-center mb-8">
-                <h2 class="text-white text-3xl font-bold mb-2">Investasi Leher ke Atas</h2>
-                <p class="text-slate-400">Lebih murah dari sekali makan di restoran, tapi ilmunya bisa dipakai cari uang seumur hidup.</p>
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.01] transition duration-300 border-4 border-slate-800 relative">
                 
-                <div class="absolute top-0 right-0">
-                    <div class="bg-red-600 text-white text-xs font-bold px-8 py-1 rotate-45 translate-x-8 translate-y-4 shadow-md">PROMO</div>
-                </div>
+                <h2 class="text-xl md:text-2xl text-slate-300 font-medium mb-8">
+                    Satu Foto HP Bisa Dijual Berkali-kali. 
+                    <span class="block mt-2 text-base md:text-lg text-slate-400 font-normal italic">
+                        Tanpa Latar Belakang Fotografi Profesional.
+                    </span>
+                </h2>
 
-                <div class="bg-gradient-to-br from-slate-100 to-white p-8">
-                    <div class="text-center border-b border-dashed border-slate-300 pb-6 mb-6">
-                        <p class="text-slate-400 text-sm mb-1 line-through decoration-red-500">Harga Normal: Rp 200.000</p>
-                        <div class="flex items-center justify-center gap-1">
-                            <span class="text-2xl font-bold text-slate-800 mt-2">Rp</span>
-                            <span class="text-7xl font-extrabold text-brand-dark tracking-tighter">69</span>
-                            <span class="text-2xl font-bold text-slate-800 mt-2">rb</span>
-                        </div>
-                        <div class="mt-4 bg-yellow-100 text-yellow-800 text-xs font-bold inline-block px-3 py-1 rounded border border-yellow-200">
-                            Hemat 65% Hari Ini
-                        </div>
-                    </div>
-
-                    <div class="bg-brand-surface border border-brand-gold/30 rounded-lg p-3 mb-6 flex gap-3 items-start">
-                        <i class="fas fa-shield-alt text-brand-gold text-2xl mt-1"></i>
-                        <div>
-                            <p class="font-bold text-slate-900 text-sm">Garansi 100% Puas</p>
-                            <p class="text-xs text-slate-600">Jika isi buku ini tidak memberikan insight baru tentang aset digital, hubungi kami.</p>
-                        </div>
-                    </div>
-
-                    <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="block w-full bg-brand-gold hover:bg-yellow-600 text-slate-900 text-center text-lg md:text-xl font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 mb-2 animate-pulse-slow uppercase">
-                        Pelajari Caranya
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
+                    <a href="#pricing" class="inline-flex justify-center items-center gap-3 bg-brand-gold hover:bg-white hover:text-brand-dark text-slate-900 text-xl font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(197,160,89,0.5)] transition-all duration-300 transform hover:-translate-y-1">
+                        <span>Ambil Ebooknya Sekarang</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
+                </div>
+                <p class="text-slate-500 text-sm">
+                    <i class="fas fa-lock text-brand-gold mr-1"></i> 100% Downloadable PDF. Akses Selamanya.
+                </p>
+            </div>
 
-                    <div class="mt-3 text-center space-y-1">
-                        <div class="flex justify-center gap-4 text-[11px] font-bold text-slate-600">
-                            <span class="flex items-center gap-1"><i class="fas fa-check text-green-600"></i> File Digital</span>
-                            <span class="flex items-center gap-1"><i class="fas fa-check text-green-600"></i> Akses Instan</span>
-                        </div>
-                        <p class="text-[10px] text-slate-400">Tidak cocok? Tidak perlu lanjutkan.</p>
+            <div class="w-full lg:w-2/5 flex justify-center items-center py-10">
+                <div class="book-3d animate-float">
+                    <div class="book-cover">
+                        <img src="image/cover.png" alt="Cover Ebook Gajian Dari Kamera HP" class="w-full h-full object-cover">
                     </div>
-                    
-                    <div class="flex justify-center flex-wrap gap-x-4 gap-y-2 text-[10px] text-slate-500 mt-4 border-t border-slate-200 pt-3">
-                        <span class="flex items-center gap-1"><i class="fas fa-lock text-green-600"></i> Pembayaran Aman</span>
-                        <span class="flex items-center gap-1"><i class="fab fa-whatsapp text-green-600"></i> Support WA</span>
-                    </div>
+                    <div class="book-spine"></div>
+                    <div class="book-pages"></div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</header>
 
-    <footer class="bg-brand-darker text-slate-500 py-10 px-4 text-center text-xs border-t border-slate-800">
-        <p class="mb-4 text-brand-gold font-bold tracking-wider">GAJIAN DARI KAMERA HP</p>
-        <div class="flex justify-center gap-4 mb-6">
-            <a href="#" class="hover:text-white">Disclaimer</a>
-            <a href="#" class="hover:text-white">Privacy Policy</a>
-            <a href="#" class="hover:text-white">Contact</a>
-        </div>
-        <p class="max-w-md mx-auto opacity-50">
-            Disclaimer: Hasil setiap orang berbeda tergantung usaha & konsistensi. Ini bukan skema cepat kaya, melainkan panduan membangun skill aset digital.
-        </p>
-        <p class="mt-4">&copy; 2026 All Rights Reserved.</p>
-    </footer>
-
-    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-3 z-50 md:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.1)]">
-        <div class="flex gap-3 items-center">
-            <div class="flex-1">
-                <p class="text-[10px] text-slate-500 line-through">Rp 200.000</p>
-                <p class="text-xl font-bold text-slate-900 leading-none">Rp 69.000</p>
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h3 class="text-center text-red-600 font-bold tracking-widest uppercase text-sm mb-2">WARNING</h3>
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-10 leading-tight">
+            3 Kesalahan Fatal Mengapa Foto Anda <br>Hanya Jadi "Sampah Memori"
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500 shadow-sm hover:bg-slate-100 transition">
+                <div class="text-4xl mb-4 text-brand-dark"><i class="fas fa-camera"></i></div>
+                <h4 class="font-bold text-slate-900 text-lg mb-2">Terjebak Alat</h4>
+                <p class="text-slate-600 text-sm">Mengira harus punya kamera 20 juta dulu baru bisa mulai. Padahal pasar butuh visual yang otentik, bukan yang "terlalu sempurna".</p>
             </div>
-            <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="flex-[2] bg-brand-gold text-slate-900 font-bold py-3 px-4 rounded-lg text-center shadow text-sm">
-                PELAJARI CARANYA
+            <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500 shadow-sm hover:bg-slate-100 transition">
+                <div class="text-4xl mb-4 text-brand-dark"><i class="fas fa-thumbs-up"></i></div>
+                <h4 class="font-bold text-slate-900 text-lg mb-2">Mental Sosmed</h4>
+                <p class="text-slate-600 text-sm">Sibuk cari Like & Comment di Instagram yang tidak membayar tagihan. Aset digital dibayar Dollar, bukan jempol.</p>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-red-500 shadow-sm hover:bg-slate-100 transition">
+                <div class="text-4xl mb-4 text-brand-dark"><i class="fas fa-brain"></i></div>
+                <h4 class="font-bold text-slate-900 text-lg mb-2">Buta Aset</h4>
+                <p class="text-slate-600 text-sm">Punya fotonya, tapi tidak tahu cara mengemas dan menawarkannya. Akibatnya foto hanya menumpuk memenuhi memori HP.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-brand-surface border-y border-slate-200">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-10">
+            <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">PROSES SIMPLE</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Cara Kerjanya Sederhana:</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">1</div>
+                <div class="pt-6">
+                    <i class="fas fa-mobile-alt text-4xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-slate-900 mb-2">Ambil Foto Pakai HP</h4>
+                    <p class="text-xs text-slate-600">Gunakan objek di sekitar rumah Anda.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">2</div>
+                <div class="pt-6">
+                    <i class="fas fa-magic text-4xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-slate-900 mb-2">Edit Ringan</h4>
+                    <p class="text-xs text-slate-600">Tanpa skill rumit, cukup perbaiki cahaya.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">3</div>
+                <div class="pt-6">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-slate-900 mb-2">Upload</h4>
+                    <p class="text-xs text-slate-600">Ke platform khusus yang diajarkan.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-card relative text-center group hover:-translate-y-2 transition-transform duration-300">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white">4</div>
+                <div class="pt-6">
+                    <i class="fas fa-sack-dollar text-4xl text-green-600 mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-slate-900 mb-2">Jadi Aset Digital</h4>
+                    <p class="text-xs text-slate-600">Foto siap menghasilkan pasif income.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-brand-dark text-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl"></div>
+
+    <div class="container mx-auto px-4 max-w-5xl relative z-10">
+        <div class="flex flex-col md:flex-row items-center gap-10">
+            <div class="w-full md:w-1/2">
+                <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">REALITAS PASAR 2026</span>
+                <h2 class="text-3xl font-bold mt-2 mb-6">Kenapa Harus Mulai SEKARANG?</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-1"><i class="fas fa-robot"></i></div>
+                        <p class="text-slate-300 text-sm"><strong class="text-white block text-base">Era AI Butuh Stok Nyata</strong>AI memang canggih, tapi terlihat palsu. Industri kreatif makin haus akan foto/video "Human Touch" yang nyata dari kamera HP Anda.</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-1"><i class="fas fa-chart-line"></i></div>
+                        <p class="text-slate-300 text-sm"><strong class="text-white block text-base">Momentum Global</strong>Platform aset digital sedang gencar mencari konten dari kreator Asia (unik & eksotis). Jangan sampai momentum ini lewat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 bg-slate-800 p-8 rounded-2xl border border-slate-700 text-center">
+                <h3 class="text-xl font-bold mb-4">Pilihan Di Tangan Anda</h3>
+                <div class="flex justify-between items-center gap-4 text-left mb-6">
+                    <div class="bg-red-500/10 p-4 rounded w-1/2 border border-red-500/20">
+                        <p class="text-xs text-red-400 font-bold uppercase">Opsi A</p>
+                        <p class="text-sm text-slate-300 mt-1">HP cuma buat scroll TikTok & main game.</p>
+                    </div>
+                    <div class="bg-green-500/10 p-4 rounded w-1/2 border border-green-500/20">
+                        <p class="text-xs text-green-400 font-bold uppercase">Opsi B</p>
+                        <p class="text-sm text-slate-300 mt-1">HP jadi "karyawan" yang kerja 24 jam.</p>
+                    </div>
+                </div>
+                <a href="#pricing" class="block w-full bg-brand-gold text-brand-dark font-bold py-3 rounded hover:bg-white transition">SAYA PILIH OPSI B</a>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <a href="#pricing" class="text-brand-gold hover:text-white underline underline-offset-4 decoration-1 decoration-brand-gold/50 text-sm font-medium transition">
+                Saya tidak mau ketinggalan momentum ini &rarr;
             </a>
         </div>
     </div>
+</section>
 
-    <!-- Script dipindahkan ke bawah agar tidak memblokir render HTML -->
-    <script defer>
-        function startTimer(duration, display) {
-            var timer = duration, hours, minutes, seconds;
-            setInterval(function () {
-                hours = parseInt(timer / 3600, 10);
-                minutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                display.textContent = hours + ":" + minutes + ":" + seconds;
-                if (--timer < 0) timer = duration;
-            }, 1000);
-        }
-        window.onload = function () {
-            var timeLimit = 60 * 60 * 2; 
-            var display = document.querySelector('#countdown');
-            if(display) startTimer(timeLimit, display);
-        };
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+<section class="py-16 bg-brand-surface">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-slate-900 mb-8">
+            "Emang Laku Foto Beginian?"
+        </h2>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
+                <img src="image/image1.jpg" alt="Foto Kabel Ruwet" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
+                    <p class="text-xs font-bold text-slate-700">Foto Kabel Ruwet</p>
+                    <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: IT</div>
+                </div>
+            </div>
+            
+            <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
+                <img src="image/image2.jpg" alt="Video Asap Kopi" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
+                    <p class="text-xs font-bold text-slate-700">Asap Kopi (Video)</p>
+                    <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Morning</div>
+                </div>
+            </div>
+            
+             <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
+                <img src="image/image3.jpg" alt="Tekstur Aspal" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
+                    <p class="text-xs font-bold text-slate-700">Tekstur Aspal</p>
+                    <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Industry</div>
+                </div>
+            </div>
+            
+             <div class="aspect-square bg-slate-100 rounded-lg relative overflow-hidden group shadow-sm border border-slate-200">
+                <img src="image/image4.jpg" alt="Cuci Tangan" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 w-full bg-white/95 p-2 text-center border-t border-slate-200">
+                    <p class="text-xs font-bold text-slate-700">Cuci Tangan</p>
+                    <div class="mt-0.5 text-[10px] bg-green-100 text-green-700 inline-block px-1.5 rounded">Konsep: Hygiene</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+            <p class="text-slate-800 font-medium mb-4">
+                Objek di atas ada di sekitar Anda, kan? <br>
+                Di buku ini, saya bongkar <strong>50+ Ide Objek Lainnya</strong> yang ada di rumah Anda.
+            </p>
+            <a href="#pricing" class="text-brand-accent font-bold hover:underline decoration-wavy">
+                Saya Mau Daftar Ide Foto-nya &raquo;
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-white border-y border-slate-100">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-2xl font-bold text-center mb-10">Apa Yang Berubah Setelah Baca Buku Ini?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-eye"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-900">Mata "Duit"</h4>
+                    <p class="text-sm text-slate-600">Anda tidak lagi melihat "sampah" atau "berantakan". Anda melihat tekstur, konsep, dan potensi uang di setiap sudut rumah.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-folder-open"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-900">Punya Aset, Bukan File</h4>
+                    <p class="text-sm text-slate-600">Galeri HP Anda bukan lagi tempat memori penuh yang sia-sia, tapi gudang stok dagangan yang siap ditawarkan ke pasar global.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-video"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-900">Skill Videografi Simpel</h4>
+                    <p class="text-sm text-slate-600">Paham cara rekam video pendek 10 detik yang stabil, tajam, dan dicari editor video, tanpa gimbal mahal.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xl shrink-0"><i class="fas fa-key"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-900">Kata Kunci Rahasia</h4>
+                    <p class="text-sm text-slate-600">Tahu cara menamai file (metadata) agar mudah ditemukan pembeli bule yang siap bayar Dollar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="#pricing" class="inline-block text-lg font-bold text-brand-dark hover:text-brand-gold border-b-2 border-brand-gold pb-1 transition-all">
+                Saya Mau Alami Perubahan Ini <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-brand-surface">
+    <div class="container mx-auto px-4 max-w-3xl text-center">
+        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">SIAPA DIBALIK BUKU INI?</h3>
+        <p class="text-xl md:text-2xl font-serif italic text-slate-800 mb-6 leading-relaxed">
+            "Dulu saya pikir fotografi itu mahal. Sampai saya sadar, foto tembok retak di belakang rumah saya laku $15. <strong>Dan itu bukan satu-satunya.</strong>"
+        </p>
+        <div class="flex items-center justify-center gap-4">
+            <div class="w-16 h-16 bg-slate-300 rounded-full overflow-hidden border-2 border-slate-200">
+                <img src="image/tim.jpg" alt="Tim Gajian Dari Kamera HP" class="w-full h-full object-cover">
+            </div>
+            <div class="text-left">
+                <p class="font-bold text-slate-900">Tim Gajian Dari Kamera</p>
+                <p class="text-xs text-slate-500">Praktisi Microstock & Mobile Photographer</p>
+                <p class="text-[10px] text-slate-500 mt-1 italic opacity-80">
+                    *Beberapa karya penulis sudah terjual di marketplace aset digital internasional.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h3 class="text-center font-bold text-slate-900 mb-8 text-lg">Apa Kata Mereka?</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-brand-surface p-4 rounded-lg shadow-sm border border-slate-100">
+                <div class="text-brand-gold text-xs mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-xs text-slate-600 italic">"Gak nyangka foto sisa masakan bisa laku. Bukunya to the point."</p>
+                <p class="text-xs font-bold text-slate-800 mt-2">- Reza, Karyawan</p>
+            </div>
+            <div class="bg-brand-surface p-4 rounded-lg shadow-sm border border-slate-100">
+                <div class="text-brand-gold text-xs mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-xs text-slate-600 italic">"Bahasa-nya enak, gak pake istilah fotografi ribet. Cocok buat pemula kayak saya."</p>
+                <p class="text-xs font-bold text-slate-800 mt-2">- Susanto, Wiraswasta</p>
+            </div>
+            <div class="bg-brand-surface p-4 rounded-lg shadow-sm border border-slate-100">
+                <div class="text-brand-gold text-xs mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-xs text-slate-600 italic">"Baru praktek 3 hari, galeri HP udah mulai rapi jadi aset."</p>
+                <p class="text-xs font-bold text-slate-800 mt-2">- Yenita, Mahasiswa</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FIXED FAQ SECTION: Replaced custom bg class with standard slate-50 and added border for visibility -->
+<section class="py-12 bg-slate-50 border-t border-slate-200">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <h3 class="text-center font-bold text-slate-900 mb-8 text-lg">Yang Sering Ditanyakan (FAQ)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
+                <p class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-camera text-brand-gold mr-1"></i> Harus Kamera Bagus?</p>
+                <p class="text-xs text-slate-600">Tidak. HP 2-3 jutaan sudah sangat cukup asal cahayanya baik.</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
+                <p class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-clock text-brand-gold mr-1"></i> Berapa Lama Mulai?</p>
+                <p class="text-xs text-slate-600">Setelah baca, hari ini juga Anda bisa mulai hunting aset di rumah.</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
+                <p class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-user-check text-brand-gold mr-1"></i> Cocok Pemula?</p>
+                <p class="text-xs text-slate-600">Sangat. Bahasa buku ini dibuat khusus untuk orang awam/gaptek.</p>
+            </div>
+        </div>
+        <p class="text-center text-sm text-slate-500 mt-8">
+            Jika pertanyaan Anda sudah terjawab, silakan lanjutkan di bawah ini:
+        </p>
+        <div class="flex justify-center mt-2">
+            <i class="fas fa-chevron-down text-brand-gold animate-bounce"></i>
+        </div>
+    </div>
+</section>
+
+<section class="bg-brand-dark pb-10 pt-16">
+    <div class="container mx-auto px-4 max-w-2xl">
+        <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 text-center shadow-lg relative overflow-hidden">
+            <div class="absolute -top-4 -right-4 w-16 h-16 bg-red-600/20 rounded-full blur-xl"></div>
+            <h3 class="font-bold text-white mb-4 text-sm uppercase tracking-widest">
+                Apa Yang <span class="text-red-400 underline decoration-red-500/50">TIDAK</span> Akan Anda Dapatkan
+            </h3>
+            <ul class="text-sm text-slate-300 space-y-2 inline-block text-left list-none">
+                <li class="flex items-start gap-2"><i class="fas fa-times text-red-500 mt-0.5"></i> Janji kaya cepat dalam semalam (Get Rich Quick).</li>
+                <li class="flex items-start gap-2"><i class="fas fa-times text-red-500 mt-0.5"></i> Screenshot pendapatan bombastis yang tidak masuk akal.</li>
+                <li class="flex items-start gap-2"><i class="fas fa-times text-red-500 mt-0.5"></i> Teori ribet tanpa praktik nyata.</li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-slate-700">
+                <p class="text-xs text-slate-500 italic">Buku ini hanya untuk yang siap praktek dan berproses.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="pb-20 pt-10 bg-brand-dark relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+    <div class="container mx-auto px-4 max-w-lg relative z-10">
+        <div class="mb-8 p-6 bg-slate-800/50 border border-slate-700 rounded-xl">
+            <h4 class="text-brand-gold font-bold mb-4 text-center tracking-wider uppercase">APA YANG KAMU DAPAT:</h4>
+            <ul class="space-y-3 text-slate-200 text-sm md:text-base">
+                <li class="flex items-center gap-3">
+                    <i class="fas fa-check-circle text-green-500"></i> Ebook PDF
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fas fa-check-circle text-green-500"></i> Step-by-step
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fas fa-check-circle text-green-500"></i> Cocok pemula
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fas fa-check-circle text-green-500"></i> Bisa dipelajari kapan saja
+                </li>
+            </ul>
+        </div>
+
+        <div class="text-center mb-8">
+            <h2 class="text-white text-3xl font-bold mb-2">Investasi Leher ke Atas</h2>
+            <p class="text-slate-400">Lebih murah dari sekali makan di restoran, tapi ilmunya bisa dipakai cari uang seumur hidup.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.01] transition duration-300 border-4 border-slate-800 relative">
+            
+            <div class="absolute top-0 right-0">
+                <div class="bg-red-600 text-white text-xs font-bold px-8 py-1 rotate-45 translate-x-8 translate-y-4 shadow-md">PROMO</div>
+            </div>
+
+            <div class="bg-gradient-to-br from-slate-100 to-white p-8">
+                <div class="text-center border-b border-dashed border-slate-300 pb-6 mb-6">
+                    <p class="text-slate-400 text-sm mb-1 line-through decoration-red-500">Harga Normal: Rp 200.000</p>
+                    <div class="flex items-center justify-center gap-1">
+                        <span class="text-2xl font-bold text-slate-800 mt-2">Rp</span>
+                        <span class="text-7xl font-extrabold text-brand-dark tracking-tighter">69</span>
+                        <span class="text-2xl font-bold text-slate-800 mt-2">rb</span>
+                    </div>
+                    <div class="mt-4 bg-yellow-100 text-yellow-800 text-xs font-bold inline-block px-3 py-1 rounded border border-yellow-200">
+                        Hemat 65% Hari Ini
+                    </div>
+                </div>
+
+                <div class="bg-brand-surface border border-brand-gold/30 rounded-lg p-3 mb-6 flex gap-3 items-start">
+                    <i class="fas fa-shield-alt text-brand-gold text-2xl mt-1"></i>
+                    <div>
+                        <p class="font-bold text-slate-900 text-sm">Garansi 100% Puas</p>
+                        <p class="text-xs text-slate-600">Jika isi buku ini tidak memberikan insight baru tentang aset digital, hubungi kami.</p>
+                    </div>
+                </div>
+
+                <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="block w-full bg-brand-gold hover:bg-yellow-600 text-slate-900 text-center text-lg md:text-xl font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 mb-2 animate-pulse-slow uppercase">
+                    Pelajari Caranya
+                </a>
+
+                <div class="mt-3 text-center space-y-1">
+                    <div class="flex justify-center gap-4 text-[11px] font-bold text-slate-600">
+                        <span class="flex items-center gap-1"><i class="fas fa-check text-green-600"></i> File Digital</span>
+                        <span class="flex items-center gap-1"><i class="fas fa-check text-green-600"></i> Akses Instan</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400">Tidak cocok? Tidak perlu lanjutkan.</p>
+                </div>
+                
+                <div class="flex justify-center flex-wrap gap-x-4 gap-y-2 text-[10px] text-slate-500 mt-4 border-t border-slate-200 pt-3">
+                    <span class="flex items-center gap-1"><i class="fas fa-lock text-green-600"></i> Pembayaran Aman</span>
+                    <span class="flex items-center gap-1"><i class="fab fa-whatsapp text-green-600"></i> Support WA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-brand-darker text-slate-500 py-10 px-4 text-center text-xs border-t border-slate-800">
+    <p class="mb-4 text-brand-gold font-bold tracking-wider">GAJIAN DARI KAMERA HP</p>
+    <div class="flex justify-center gap-4 mb-6">
+        <a href="#" class="hover:text-white">Disclaimer</a>
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+        <a href="#" class="hover:text-white">Contact</a>
+    </div>
+    <p class="max-w-md mx-auto opacity-50">
+        Disclaimer: Hasil setiap orang berbeda tergantung usaha & konsistensi. Ini bukan skema cepat kaya, melainkan panduan membangun skill aset digital.
+    </p>
+    <p class="mt-4">&copy; 2026 All Rights Reserved.</p>
+</footer>
+
+<div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-3 z-50 md:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.1)]">
+    <div class="flex gap-3 items-center">
+        <div class="flex-1">
+            <p class="text-[10px] text-slate-500 line-through">Rp 200.000</p>
+            <p class="text-xl font-bold text-slate-900 leading-none">Rp 69.000</p>
+        </div>
+        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="flex-[2] bg-brand-gold text-slate-900 font-bold py-3 px-4 rounded-lg text-center shadow text-sm">
+            PELAJARI CARANYA
+        </a>
+    </div>
+</div>
+
+<script>
+    function startTimer(duration, display) {
+        var timer = duration, hours, minutes, seconds;
+        setInterval(function () {
+            hours = parseInt(timer / 3600, 10);
+            minutes = parseInt((timer % 3600) / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+            if (--timer < 0) timer = duration;
+        }, 1000);
+    }
+    window.onload = function () {
+        var timeLimit = 60 * 60 * 2; 
+        var display = document.querySelector('#countdown');
+        startTimer(timeLimit, display);
+    };
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
