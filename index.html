@@ -21,6 +21,8 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Pixel ID Anda
     fbq('init', '1420941069372944');
     fbq('track', 'PageView');
     </script>
@@ -359,7 +361,10 @@
                     </div>
                 </div>
 
-                <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="btn btn-full">
+                <!-- ADDED ONCLICK EVENT -->
+                <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" 
+                   class="btn btn-full"
+                   onclick="fbq('track', 'InitiateCheckout');">
                     PELAJARI CARANYA
                 </a>
 
@@ -388,7 +393,11 @@
             <div style="font-size: 0.75rem; text-decoration: line-through; color: #64748b;">Rp 99.000</div>
             <div class="bold" style="font-size: 1.2rem; line-height: 1;">Rp 69.000</div>
         </div>
-        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" class="btn" style="padding: 12px 15px; font-size: 0.85rem;">
+        <!-- ADDED ONCLICK EVENT -->
+        <a href="https://digibrain.myscalev.com/c/checkout?variant_ids=424881&qty=1" 
+           class="btn" 
+           style="padding: 12px 15px; font-size: 0.85rem;"
+           onclick="fbq('track', 'InitiateCheckout');">
             PELAJARI CARANYA
         </a>
     </div>
@@ -417,6 +426,3 @@
     </script>
 </body>
 </html>
-
-
-
